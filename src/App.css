@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .App {
     text-align: center;
 }
@@ -36,7 +35,7 @@
     to {
         transform: rotate(360deg);
     }
-=======
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -132,5 +131,4 @@ a {
   .section__margin {
     margin: 4rem 2rem;
   }  
->>>>>>> fbd60b4fb13e49d64a95fc0d5ebda6963cffa353
 }
