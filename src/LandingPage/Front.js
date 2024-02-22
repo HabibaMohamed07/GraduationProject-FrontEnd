@@ -9,8 +9,7 @@ import '../App.css';
 const Front = () => (
   <div className="App">
     <div className="gradient__bg">
-      <Navbar />
-      <Header />
+    <Header />
     </div>
     <Container1 />
     <Container2 />

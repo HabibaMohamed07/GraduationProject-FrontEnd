@@ -1,4 +1,3 @@
-
 import logo from "./logo.svg";
 import "./App.css";
 import * as React from "react";
@@ -13,10 +12,10 @@ import DialogContent from "@mui/joy/DialogContent";
 import Stack from "@mui/joy/Stack";
 import Add from "@mui/icons-material/Add";
 import JoySignInSideTemplate from "./SignIn/Signin.tsx";
-import Header from "./Components/Dummynav.tsx";
+import Header from './Containers/Header/header';
 import Signup from "./SignUp/Signup.tsx";
 import Signin from "./SignIn/Signin.tsx";
-
+import Navbar from './LandingPage/navbar/Navbar';
 import Front from './LandingPage/Front';
 import {
   BrowserRouter as Router,
@@ -30,11 +29,12 @@ function App() {
   return (
 
     <Router>
-      <Header />
+      <Navbar />
+      {/* <Header /> */}
       <Routes>
-        <Route path="/" element={<Signin />} />
+        <Route path="/Signin" element={<Signin />} />
         <Route path="/Signup" element={<Signup />} />
-        <Front/>
+        <Route path="/" element={<Front/>}/>
       </Routes>
     </Router>
 

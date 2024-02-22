@@ -112,12 +112,7 @@ export default function JoySignInSideTemplate() {
               justifyContent: 'space-between',
             }}
           >
-            <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
-              <IconButton variant="soft" color="primary" size="sm">
-                <BadgeRoundedIcon />
-              </IconButton>
-              <Typography level="title-lg">Company logo</Typography>
-            </Box>
+            
             {/* <ColorSchemeToggle /> */}
           </Box>
           <Box
@@ -211,9 +206,11 @@ export default function JoySignInSideTemplate() {
                       Forgot your password?
                     </Link>
                   </Box>
-                  <Button type="submit" fullWidth>
+                  <Link to='/'>
+                    <Button type="submit" fullWidth>
                     Sign in
                   </Button>
+                  </Link>
                 </Stack>
               </form>
             </Stack>
@@ -231,7 +228,7 @@ export default function JoySignInSideTemplate() {
           position: 'fixed',
           zIndex:-1,
           right: 0,
-          top: 36,
+          top:104,
           bottom: 0,
           left: 'clamp(0px, (100vw - var(--Collapsed-breakpoint)) * 999, 100vw - var(--Cover-width))',
         

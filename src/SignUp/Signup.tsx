@@ -287,7 +287,7 @@ export default function JoySignInSideTemplate() {
                 </Typography>
                 <Typography level="body-sm">
                   Already have an account?
-                  <Link to="/" style={{textDecoration:"none"}}>
+                  <Link to="/Signin" style={{textDecoration:"none"}}>
                     Sign in!
                   </Link>
                 </Typography>
@@ -820,9 +820,11 @@ sx={{
                    </FormControl>
                    <CardActions sx={{ gridColumn: '1/-1'
                   ,display:"Grid" }}>
-                     <Button variant="solid" color="primary">
+                    <Link to="/">
+                     <Button variant="solid" color="primary" >
                        Add card
                      </Button>
+                     </Link>
                     
                     <Button variant="solid" color="danger" onClick={handleWithDrawPayment}>
                        Cancel
