@@ -1,3 +1,4 @@
+
 import logo from "./logo.svg";
 import "./App.css";
 import * as React from "react";
@@ -15,22 +16,28 @@ import JoySignInSideTemplate from "./SignIn/Signin.tsx";
 import Header from "./Components/Dummynav.tsx";
 import Signup from "./SignUp/Signup.tsx";
 import Signin from "./SignIn/Signin.tsx";
+
+import Front from './LandingPage/Front';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Switch,
 } from "react-router-dom";
+
 function App() {
   const [open, setOpen] = React.useState(false);
   return (
+
     <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Signin />} />
         <Route path="/Signup" element={<Signup />} />
+        <Front/>
       </Routes>
     </Router>
+
   );
 }
 

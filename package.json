@@ -7,12 +7,20 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.10",
     "@mui/joy": "^5.0.0-beta.28",
+<<<<<<< HEAD
+=======
+    "@mui/lab": "^5.0.0-alpha.165",
+>>>>>>> fbd60b4fb13e49d64a95fc0d5ebda6963cffa353
     "@mui/material": "^5.15.10",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
+=======
+    "react-icons": "^5.0.1",
+>>>>>>> fbd60b4fb13e49d64a95fc0d5ebda6963cffa353
     "react-router-dom": "^6.22.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
