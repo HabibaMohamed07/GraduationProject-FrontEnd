@@ -24,16 +24,22 @@ import {
   Switch,
 } from "react-router-dom";
 
+
 function App() {
   const [open, setOpen] = React.useState(false);
   return (
 
     <Router>
-      <Navbar />
+{/*       
+      <div style={{position:"absolute",top:10}}>
+          <Navbar />
+      </div> */}
+
+
       {/* <Header /> */}
       <Routes>
-        <Route path="/Signin" element={<Signin />} />
-        <Route path="/Signup" element={<Signup />} />
+        <Route path="/Signin" element={<><Navbar/> <Signin /></>} />
+        <Route path="/Signup" element={<><Navbar/><Signup /></>} />
         <Route path="/" element={<Front/>}/>
       </Routes>
     </Router>
@@ -42,3 +48,4 @@ function App() {
 }
 
 export default App;
+

@@ -41,7 +41,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import List from '@mui/joy/List';
 import { Grid } from "@mui/material";
 import './Signup.css';
-
+import Navbar from "../LandingPage/navbar/Navbar.js";
 
 interface FormElements extends HTMLFormControlsCollection {
   //step 1
@@ -200,6 +200,7 @@ export default function JoySignInSideTemplate() {
     }
   };
   return (
+    
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
       <GlobalStyles
@@ -212,6 +213,7 @@ export default function JoySignInSideTemplate() {
           },
         }}
       />
+      
       <Box
         sx={(theme) => ({
           width:
