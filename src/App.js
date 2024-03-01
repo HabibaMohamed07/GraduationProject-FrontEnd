@@ -43,17 +43,17 @@ function App() {
 
       {/* <Header /> */}
       <Routes>
-        <Route path="/Signin" element={<><div className="gradient__bg"> <Navbar/> </div><Signin /></>} />
-        <Route path="/Signup"  element={<><div className="gradient__bg"> <Navbar/> </div><Signup /></>} />
+        <Route path="/Signin" element={<><div className="black"> <Navbar/> </div><Signin /></>} />
+        <Route path="/Signup"  element={<><div className="black"> <Navbar/> </div><Signup /></>} />
         <Route path="/" element={<Front/>}/>
         <Route path='/Profile-Patient' element={<ProfilePatient/>}/>
         
         <Route path='/Profile-Admin' element={<ProfileAdmin/>}/>
         
         <Route path='/Profile-Doctor' element={<ProfileDoctor/>}/>
-         < Route path='/Profile' element={<><div className="gradient__bg"><Navbar isLoggedIn={true}/></div><Profile role={'Patient'}/></>}/>
+         < Route path='/Profile' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Profile role={'Patient'}/></>}/>
  
-        <Route path="/Dashboard" element={<><div className="gradient__bg"><Navbar isLoggedIn={true}/></div><Dashboard/></>}/>
+        <Route path="/Dashboard" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Dashboard/></>}/>
       </Routes>
     </Router>
 

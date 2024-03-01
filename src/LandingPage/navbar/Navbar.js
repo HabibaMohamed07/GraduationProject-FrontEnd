@@ -146,14 +146,14 @@ const Navbar = ({ isLoggedIn }) => {
             </MenuItem>
             <ListDivider />
             <MenuItem component="a" href="/blog/first-look-at-joy/">
-              First look at Joy UI
+              Contact Us
               <OpenInNewRoundedIcon />
             </MenuItem>
             <MenuItem
               component="a"
               href="https://github.com/mui/material-ui/tree/master/docs/data/joy/getting-started/templates/email"
             >
-              Sourcecode
+              Instructions
               <OpenInNewRoundedIcon />
             </MenuItem>
             <ListDivider />
