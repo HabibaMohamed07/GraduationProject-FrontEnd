@@ -9,7 +9,7 @@ import Divider from "@mui/joy/Divider";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel, { formLabelClasses } from "@mui/joy/FormLabel";
 import IconButton, { IconButtonProps } from "@mui/joy/IconButton";
-import { Link } from 'react-router-dom';
+import { Link,useNavigate   } from 'react-router-dom';
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
@@ -42,6 +42,7 @@ import List from '@mui/joy/List';
 import { Grid } from "@mui/material";
 import './Signup.css';
 import Navbar from "../LandingPage/navbar/Navbar.js";
+import { Maximize } from "@mui/icons-material";
 
 interface FormElements extends HTMLFormControlsCollection {
   //step 1
@@ -227,7 +228,7 @@ export default function JoySignInSideTemplate() {
           backdropFilter: "blur(12px)",
           backgroundColor: "rgba(255 255 255 / 0.2)",
           [theme.getColorSchemeSelector("dark")]: {
-            backgroundColor: "rgba(19 19 24 / 0.4)",
+            background: "rgb(4,12,24)",
           },
         })}
       >
@@ -251,12 +252,7 @@ export default function JoySignInSideTemplate() {
               justifyContent: "space-between",
             }}
           >
-            <Box sx={{ gap: 2, display: "flex", alignItems: "center" }}>
-              <IconButton variant="soft" color="primary" size="sm">
-                <BadgeRoundedIcon />
-              </IconButton>
-              <Typography level="title-lg">Company logo</Typography>
-            </Box>
+           
             {/* <ColorSchemeToggle /> */}
           </Box>
           <Box
@@ -821,12 +817,12 @@ sx={{
                      <Input placeholder="Enter cardholder's full name" />
                    </FormControl>
                    <CardActions sx={{ gridColumn: '1/-1'
-                  ,display:"Grid" }}>
-                    <Link to="/">
-                     <Button variant="solid" color="primary" >
+                  ,display:"grid" }}>
+                    
+                     <Button variant="solid" color="primary" component={Link} to="/">
                        Add card
                      </Button>
-                     </Link>
+                    
                     
                     <Button variant="solid" color="danger" onClick={handleWithDrawPayment}>
                        Cancel
@@ -875,11 +871,11 @@ sx={{
       </Box>
       <Box
         sx={(theme) => ({
-          height: "100%",
-          position: "fixed",
+          height: "107%",
+          position: "absolute",
           zIndex: -1,
           right: 0,
-          top: 36,
+          top: 104,
           bottom: 0,
           left: "clamp(0px, (100vw - var(--Collapsed-breakpoint)) * 999, 100vw - var(--Cover-width))",
 
@@ -892,7 +888,7 @@ sx={{
           backgroundRepeat: "no-repeat",
           backgroundImage: `url(${FormPng})`,
           [theme.getColorSchemeSelector("dark")]: {
-            backgroundImage: `url(${Robot})`,
+            backgroundImage: `url(${FormPng})`,
           },
         })}
       />

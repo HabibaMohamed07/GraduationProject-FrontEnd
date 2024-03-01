@@ -17,10 +17,12 @@ import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded';
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 import GoogleIcon from './GoogleIcon.tsx';
-import FormPng from '../Assets/Robot-Hand.jpg';
+import Mountain from '../Assets/Mountain.avif';
 import Signup from '../SignUp/Signup.js';
 import { Link } from 'react-router-dom';
 import Navbar from '../LandingPage/navbar/Navbar.js';
+import FormPng  from "../Assets/Robot-Hand.jpg";
+import SignIn from '../Assets/SignIn.png';
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
@@ -90,7 +92,7 @@ export default function JoySignInSideTemplate() {
           backdropFilter: 'blur(12px)',
           backgroundColor: 'rgba(255 255 255 / 0.2)',
           [theme.getColorSchemeSelector('dark')]: {
-            backgroundColor: 'rgba(19 19 24 / 0.4)',
+            backgroundColor: 'rgb(4,12,24)',
           },
         })}
       >
@@ -204,9 +206,7 @@ export default function JoySignInSideTemplate() {
                     }}
                   >
                     <Checkbox size="sm" label="Remember me" name="persistent" />
-                    <Link level="title-sm" href="#replace-with-a-link">
-                      Forgot your password?
-                    </Link>
+                    
                   </Box>
                   <Link to='/'>
                     <Button type="submit" fullWidth>
@@ -219,7 +219,7 @@ export default function JoySignInSideTemplate() {
           </Box>
           <Box component="footer" sx={{ py: 3 }}>
             <Typography level="body-xs" textAlign="center">
-              © Your company {new Date().getFullYear()}
+              © MindMend {new Date().getFullYear()}
             </Typography>
           </Box>
         </Box>
@@ -245,7 +245,7 @@ export default function JoySignInSideTemplate() {
           `url(${FormPng})`,
           [theme.getColorSchemeSelector('dark')]: {
             backgroundImage:
-              'url(https://images.unsplash.com/photo-1572072393749-3ca9c8ea0831?auto=format&w=1000&dpr=2)',
+              `url(${SignIn})`,
           },
         })}
       />

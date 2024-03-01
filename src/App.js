@@ -23,8 +23,11 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-
-
+import ProfilePatient from './Profile/profile-patient.tsx';
+import ProfileDoctor from './Profile/profile-doctor.tsx';
+import ProfileAdmin from './Profile/profile-admin.tsx';
+import Profile from './Profile/Profile.tsx';
+import SelectGame from './Components/Game/SelectGame.tsx';
 function App() {
   const [open, setOpen] = React.useState(false);
   return (
@@ -38,9 +41,16 @@ function App() {
 
       {/* <Header /> */}
       <Routes>
-        <Route path="/Signin" element={<><Navbar/> <Signin /></>} />
-        <Route path="/Signup" element={<><Navbar/><Signup /></>} />
+        <Route path="/Signin" element={<><div className="gradient__bg"> <Navbar/> </div><Signin /></>} />
+        <Route path="/Signup"  element={<><div className="gradient__bg"> <Navbar/> </div><Signup /></>} />
         <Route path="/" element={<Front/>}/>
+        <Route path='/Profile-Patient' element={<ProfilePatient/>}/>
+        
+        <Route path='/Profile-Admin' element={<ProfileAdmin/>}/>
+        
+        <Route path='/Profile-Doctor' element={<ProfileDoctor/>}/>
+         < Route path='/Profile-test' element={<Profile role={'Admin'}/>}/>
+ 
       </Routes>
     </Router>
 

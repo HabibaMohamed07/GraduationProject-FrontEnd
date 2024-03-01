@@ -68,6 +68,9 @@ a {
 .bg {
     background-color: rgb(4, 11, 22);
 }
+  
+
+
 
 .gradient__text {
     background: var(--gradient-text);
