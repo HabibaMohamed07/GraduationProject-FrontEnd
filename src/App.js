@@ -17,6 +17,7 @@ import Signup from "./SignUp/Signup.tsx";
 import Signin from "./SignIn/Signin.tsx";
 import Navbar from './LandingPage/navbar/Navbar';
 import Front from './LandingPage/Front';
+import Dashboard from './Dashboard/src/App.jsx';
 import {
   BrowserRouter as Router,
   Routes,
@@ -51,6 +52,7 @@ function App() {
         <Route path='/Profile-Doctor' element={<ProfileDoctor/>}/>
          < Route path='/Profile-test' element={<Profile role={'Admin'}/>}/>
  
+        <Route path="/Dashboard" element={<Dashboard/>}/>
       </Routes>
     </Router>
 
