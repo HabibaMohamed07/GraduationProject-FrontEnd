@@ -20,6 +20,7 @@ import GoogleIcon from './GoogleIcon.tsx';
 import FormPng from '../Assets/Robot-Hand.jpg';
 import Signup from '../SignUp/Signup.js';
 import { Link } from 'react-router-dom';
+import Navbar from '../LandingPage/navbar/Navbar.js';
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
@@ -75,6 +76,7 @@ export default function JoySignInSideTemplate() {
           },
         }}
       />
+      
       <Box
         sx={(theme) => ({
           width:
@@ -225,7 +227,7 @@ export default function JoySignInSideTemplate() {
       <Box
         sx={(theme) => ({
           height: '100%',
-          position: 'fixed',
+          position: 'absolute',
           zIndex:-1,
           right: 0,
           top:104,

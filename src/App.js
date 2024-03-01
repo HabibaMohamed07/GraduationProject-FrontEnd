@@ -17,6 +17,7 @@ import Signup from "./SignUp/Signup.tsx";
 import Signin from "./SignIn/Signin.tsx";
 import Navbar from './LandingPage/navbar/Navbar';
 import Front from './LandingPage/Front';
+import Dashboard from './Dashboard/src/App.jsx';
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,17 +25,24 @@ import {
   Switch,
 } from "react-router-dom";
 
+
 function App() {
   const [open, setOpen] = React.useState(false);
   return (
 
     <Router>
-      <Navbar />
+{/*       
+      <div style={{position:"absolute",top:10}}>
+          <Navbar />
+      </div> */}
+
+
       {/* <Header /> */}
       <Routes>
-        <Route path="/Signin" element={<Signin />} />
-        <Route path="/Signup" element={<Signup />} />
+        <Route path="/Signin" element={<><Navbar/> <Signin /></>} />
+        <Route path="/Signup" element={<><Navbar/><Signup /></>} />
         <Route path="/" element={<Front/>}/>
+        <Route path="/Dashboard" element={<Dashboard/>}/>
       </Routes>
     </Router>
 
@@ -42,3 +50,4 @@ function App() {
 }
 
 export default App;
+
