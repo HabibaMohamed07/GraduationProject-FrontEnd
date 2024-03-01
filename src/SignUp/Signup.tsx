@@ -819,7 +819,7 @@ sx={{
                    <CardActions sx={{ gridColumn: '1/-1'
                   ,display:"grid" }}>
                     
-                     <Button variant="solid" color="primary" component={Link} to="/">
+                     <Button variant="solid" color="primary" component={Link} to="/Dashboard">
                        Add card
                      </Button>
                     

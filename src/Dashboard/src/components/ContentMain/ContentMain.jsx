@@ -20,7 +20,7 @@ const ContentMain = () => {
             <Budget />
             <div className="grid-two-item">
               <div className="subgrid-two">
-                {/* <Subscriptions /> */}
+                <Subscriptions />
                 <Savings />
               </div>
             </div>

@@ -208,7 +208,7 @@ export default function JoySignInSideTemplate() {
                     <Checkbox size="sm" label="Remember me" name="persistent" />
                     
                   </Box>
-                  <Link to='/'>
+                  <Link to='/Dashboard'>
                     <Button type="submit" fullWidth>
                     Sign in
                   </Button>

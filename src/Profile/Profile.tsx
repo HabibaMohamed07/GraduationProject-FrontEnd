@@ -1,19 +1,44 @@
 import ProfileAdmin from './profile-admin.tsx';
 import ProfilePatient from './profile-patient.tsx';
 import ProfileDoctor from './profile-doctor.tsx'
-
+import React from 'react';
+import './profile.css';
+import Sidebar from '../Dashboard/src/layout/Sidebar/Sidebar.jsx';
 export default function MyProfile({role})
 {
     if(role==='Patient')
     {
-        return <ProfilePatient/>;
+        return  ( 
+      
+        <div className='app profile'>
+      
+          <Sidebar />
+          <ProfilePatient />;
+        </div>
+     
+        )
     }
     else if(role==='Doctor')
     {
-        return   <ProfileDoctor />;
+        return (  
+        
+            <div className='app profile'>
+      
+            <Sidebar />
+        <ProfileDoctor />;
+        </div>
+        )
     }
     else if (role==='Admin')
-    {
-        return <ProfileAdmin/>;
+    { 
+        return (
+           
+                <div className='app profile'>
+          
+                <Sidebar />
+            <ProfileAdmin/>;
+            </div>
+          
+        )
     }
 }

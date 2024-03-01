@@ -30,7 +30,7 @@ import VideocamRoundedIcon from '@mui/icons-material/VideocamRounded';
 import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRounded';
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import { CssVarsProvider } from '@mui/joy';
-
+import { personsImgs } from '../Dashboard/src/utils/images';
 import DropZone from './dropzone.tsx';
 import FileUpload from './FileUpload.tsx';
 // import CountrySelector from './CountrySelector';
@@ -45,48 +45,8 @@ export default function MyProfile() {
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
     <Box sx={{ flex: 1, width: '100%' }}>
-      <Box
-        sx={{
-          position: 'sticky',
-          top: { sm: -100, md: -110 },
-          bgcolor: 'background.body',
-          zIndex: 9995,
-        }}
-      >
-        <Box sx={{ px: { xs: 2, md: 6 } }}>
-          <Breadcrumbs
-            size="sm"
-            aria-label="breadcrumbs"
-            separator={<ChevronRightRoundedIcon />}
-            sx={{ pl: 0 }}
-          >
-            <Link
-              underline="none"
-              color="neutral"
-              href="#some-link"
-              aria-label="Home"
-            >
-              <HomeRoundedIcon />
-            </Link>
-            <Link
-              underline="hover"
-              color="neutral"
-              href="#some-link"
-              fontSize={12}
-              fontWeight={500}
-            >
-              Users
-            </Link>
-            <Typography color="primary" fontWeight={500} fontSize={12}>
-              My profile
-            </Typography>
-          </Breadcrumbs>
-          <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2 }}>
-            My profile
-          </Typography>
-        </Box>
+      
        
-      </Box>
       <Stack
         spacing={4}
         sx={{
@@ -97,11 +57,11 @@ export default function MyProfile() {
           py: { xs: 2, md: 3 },
         }}
       >
-        <Card>
+        <Card sx={{ backgroundColor: 'rgb(4,12,24)', mb: 2 }} >
           <Box sx={{ mb: 1 }}>
             <Typography level="title-md">Personal info</Typography>
             <Typography level="body-sm">
-              Customize how your profile information will apper to the networks.
+              Customize how your profile information will apper to the website.
             </Typography>
           </Box>
           <Divider />
@@ -117,8 +77,8 @@ export default function MyProfile() {
                 sx={{ flex: 1, minWidth: 120, borderRadius: '100%' }}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-                  srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
+                  src={personsImgs.person_two}
+                  
                   loading="lazy"
                   alt=""
                 />
@@ -165,7 +125,7 @@ export default function MyProfile() {
                     type="email"
                     startDecorator={<EmailRoundedIcon />}
                     placeholder="email"
-                    defaultValue="siriwatk@test.com"
+                    defaultValue="habiba@gmail.com"
                     sx={{ flexGrow: 1 }}
                   />
                 </FormControl>
@@ -190,8 +150,8 @@ export default function MyProfile() {
                   sx={{ flex: 1, minWidth: 108, borderRadius: '100%' }}
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-                    srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
+                    src={personsImgs.person_two}
+                   
                     loading="lazy"
                     alt=""
                   />
@@ -265,7 +225,7 @@ export default function MyProfile() {
         </Card>
      
          
-        <Card>
+        <Card sx={{ backgroundColor: 'rgb(4,12,24)', mb: 2 }}>
           <Box sx={{ mb: 1 }}>
             <Typography level="title-md">Required Papers</Typography>
             <Typography level="body-sm">
@@ -274,18 +234,20 @@ export default function MyProfile() {
           </Box>
           <Divider />
           <Stack spacing={2} sx={{ my: 1 }}>
-            <DropZone />
+            <DropZone  sx={{ backgroundColor: 'rgb(4,12,24)', mb: 2 }}/>
             <FileUpload
               icon={<InsertDriveFileRoundedIcon />}
               fileName="X-ray.pdf"
               fileSize="200 kB"
               progress={100}
+              sx={{ backgroundColor: 'rgb(4,12,24)', mb: 2 }}
             />
             <FileUpload
               icon={<InsertDriveFileRoundedIcon />}
               fileName="CBC.pdf"
               fileSize="200KB"
               progress={50}
+              sx={{ backgroundColor: 'rgb(4,12,24)', mb: 2 }}
             />
           </Stack>
           <CardOverflow sx={{ borderTop: '1px solid', borderColor: 'divider' }}>

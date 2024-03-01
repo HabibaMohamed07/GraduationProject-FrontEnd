@@ -29,6 +29,7 @@ import ProfileDoctor from './Profile/profile-doctor.tsx';
 import ProfileAdmin from './Profile/profile-admin.tsx';
 import Profile from './Profile/Profile.tsx';
 import SelectGame from './Components/Game/SelectGame.tsx';
+import Sidebar from "./Dashboard/src/layout/Sidebar/Sidebar";
 function App() {
   const [open, setOpen] = React.useState(false);
   return (
@@ -50,9 +51,9 @@ function App() {
         <Route path='/Profile-Admin' element={<ProfileAdmin/>}/>
         
         <Route path='/Profile-Doctor' element={<ProfileDoctor/>}/>
-         < Route path='/Profile-test' element={<Profile role={'Admin'}/>}/>
+         < Route path='/Profile' element={<><div className="gradient__bg"><Navbar isLoggedIn={true}/></div><Profile role={'Patient'}/></>}/>
  
-        <Route path="/Dashboard" element={<Dashboard/>}/>
+        <Route path="/Dashboard" element={<><div className="gradient__bg"><Navbar isLoggedIn={true}/></div><Dashboard/></>}/>
       </Routes>
     </Router>
 

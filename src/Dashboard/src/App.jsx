@@ -1,4 +1,4 @@
-import './App.css';
+import './dashboard.css';
 import Sidebar from './layout/Sidebar/Sidebar';
 import Content from './layout/Content/Content';
 
