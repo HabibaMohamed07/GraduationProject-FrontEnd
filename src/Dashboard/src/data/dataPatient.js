@@ -81,6 +81,30 @@ export const budget = [{
         amount: 16000
     },
     {
+        id: 20,
+        title: "Loan Payment",
+        type: "Automated",
+        amount: 16000
+    },
+    {
+        id: 20,
+        title: "Loan Payment",
+        type: "Automated",
+        amount: 16000
+    },
+    {
+        id: 20,
+        title: "Loan Payment",
+        type: "Automated",
+        amount: 16000
+    },
+    {
+        id: 20,
+        title: "Loan Payment",
+        type: "Automated",
+        amount: 16000
+    },
+    {
         id: 21,
         title: "Foodstuff",
         type: "Automated",
@@ -91,6 +115,18 @@ export const budget = [{
         title: "Subscriptions",
         type: null,
         amount: 10000
+    },
+    {
+        id: 23,
+        title: "Subscriptions",
+        type: null,
+        amount: 40000
+    },
+    {
+        id: 23,
+        title: "Subscriptions",
+        type: null,
+        amount: 40000
     },
     {
         id: 23,

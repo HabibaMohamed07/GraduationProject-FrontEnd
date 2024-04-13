@@ -31,6 +31,9 @@ import DoctorDetails from './Dashboard/src/Admin/DoctorDetails.tsx';
 import AssignDoctor from "./Dashboard/src/Admin/AssignDoctor.tsx";
 import PatientListPageContent from "./Dashboard/src/Admin/PatientListPage.tsx";
 import Settings from "./settings.tsx";
+import DoctorsPatientListView from "./Dashboard/src/Doctor/PatientsListView.tsx";
+import PatientDetails from "./Dashboard/src/Doctor/PatientDetails.tsx";
+import AddingComment from "./Dashboard/src/Doctor/AddComment.tsx";
 function App() {
 
   const [open, setOpen] = React.useState(false);
@@ -54,11 +57,14 @@ function App() {
         <Route path='/game' element={<SelectGame/>}/>
         <Route path='/AssignDoctor' element={<><div className="black"><Navbar isLoggedIn={true}/></div><AssignDoctor/></>}/>
         <Route path='/DoctorDetails' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorDetails/></>} />
+        <Route path='/PatientDetails' element={<><div className="black"><Navbar isLoggedIn={true}/></div><PatientDetails/></>} />
+        <Route path='/AddComment' element={<><div className="black"><Navbar isLoggedIn={true}/></div><AddingComment/></>} />
         <Route path='/DoctorsList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorListPage/></>}/>
         <Route path='/PatientsList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><PatientListPageContent/></>}/>
-        <Route path='/Profile' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Profile role={'Admin'}/></>}/>
-        <Route path="/Dashboard" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Dashboard role={'Admin'}/></>}/>
-        <Route path="/Settings" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Settings/></>}/>
+        <Route path='/PatientList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorsPatientListView/></>}/>
+        <Route path='/Profile' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Profile role={'Doctor'}/></>}/>
+        <Route path="/Dashboard" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Dashboard role={'Doctor'}/></>}/>
+        <Route path="/Settings" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Settings role={'Doctor'}/></>}/>
       </Routes>
     </Router>
 

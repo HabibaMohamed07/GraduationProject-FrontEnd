@@ -8,6 +8,13 @@ const comments = [
   "Patient's condition is stable",
   "Improvement observed in mobility",
   "Recovery is slower than expected",
+  "Recovery is slower than expected",
+  "Recovery is slower than expected",
+  "Recovery is slower than expected",
+  "Recovery is slower than expected",
+  "Recovery is slower than expected",
+  "Recovery is slower than expected",
+  "Recovery is slower than expected",
   
 ];
 
@@ -20,7 +27,7 @@ const Budget = () => {
           <img src={iconsImgs.plus} alt="Plus Icon" />
         </button>
       </div>
-      <div className="grid-c4-content bg-jet">
+      <div className="grid-c4-content bg-jet scroll">
         <div className="grid-items">
           {budget.map((budgetItem, index) => (
             <div className="grid-item" key={budgetItem.id}>
