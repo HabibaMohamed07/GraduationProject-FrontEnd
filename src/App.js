@@ -35,6 +35,13 @@ import DoctorsPatientListView from "./Dashboard/src/Doctor/PatientsListView.tsx"
 import PatientDetails from "./Dashboard/src/Doctor/PatientDetails.tsx";
 import AddingComment from "./Dashboard/src/Doctor/AddComment.tsx";
 import  Game  from "./3JS/tennis.jsx";
+import GameCalendar from "./Dashboard/src/Patient/GameCalendar.jsx";
+import Targets from "./Dashboard/src/Patient/Targets.jsx";
+import TreatmentProgress from "./Dashboard/src/Patient/TreatmentProgress.jsx";
+import LastGamePlayed from "./Dashboard/src/Patient/LastGamePlayed.jsx";
+import DoctorComments from "./Dashboard/src/Patient/DoctorComments.jsx";
+import SubscriptionDetails from "./Dashboard/src/Patient/SubscriptionDetails.jsx";
+
 function App() {
 
   const [open, setOpen] = React.useState(false);
@@ -64,9 +71,15 @@ function App() {
         <Route path='/DoctorsList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorListPage/></>}/>
         <Route path='/PatientsList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><PatientListPageContent/></>}/>
         <Route path='/PatientList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorsPatientListView/></>}/>
-        <Route path='/Profile' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Profile role={'Admin'}/></>}/>
-        <Route path="/Dashboard" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Dashboard role={'Admin'}/></>}/>
-        <Route path="/Settings" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Settings role={'Admin'}/></>}/>
+        <Route path='/Profile' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Profile role={'Patient'}/></>}/>
+        <Route path="/Dashboard" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Dashboard role={'Patient'}/></>}/>
+        <Route path="/Settings" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Settings role={'Patient'}/></>}/>
+        <Route path='/GameCalendar' element={<><div className="black"><Navbar isLoggedIn={true}/></div><GameCalendar/></>} />
+        <Route path='/Targets' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Targets/></>} />
+        <Route path='/TreatmentProgress' element={<><div className="black"><Navbar isLoggedIn={true}/></div><TreatmentProgress/></>} />
+        <Route path='/LastGamePlayed' element={<><div className="black"><Navbar isLoggedIn={true}/></div><LastGamePlayed/></>} />
+        <Route path='/DoctorComments' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorComments/></>} />
+        <Route path='/SubscriptionDetails' element={<><div className="black"><Navbar isLoggedIn={true}/></div><SubscriptionDetails/></>} />
       </Routes>
     </Router>
 
