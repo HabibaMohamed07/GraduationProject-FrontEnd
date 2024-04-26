@@ -34,6 +34,7 @@ import Settings from "./settings.tsx";
 import DoctorsPatientListView from "./Dashboard/src/Doctor/PatientsListView.tsx";
 import PatientDetails from "./Dashboard/src/Doctor/PatientDetails.tsx";
 import AddingComment from "./Dashboard/src/Doctor/AddComment.tsx";
+import  Game  from "./3JS/tennis.jsx";
 function App() {
 
   const [open, setOpen] = React.useState(false);
@@ -48,6 +49,7 @@ function App() {
 
       {/* <Header /> */}
       <Routes>
+        <Route path='/game' element={<Game selectedGame={'Sorting'} />}/>
         <Route path="/Signin" element={<><div className="black"> <Navbar/> </div><Signin /></>} />
         <Route path="/Signup"  element={<><div className="black"> <Navbar/> </div><Signup /></>} />
         <Route path="/" element={<Front/>}/>
@@ -62,9 +64,9 @@ function App() {
         <Route path='/DoctorsList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorListPage/></>}/>
         <Route path='/PatientsList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><PatientListPageContent/></>}/>
         <Route path='/PatientList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorsPatientListView/></>}/>
-        <Route path='/Profile' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Profile role={'Doctor'}/></>}/>
-        <Route path="/Dashboard" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Dashboard role={'Doctor'}/></>}/>
-        <Route path="/Settings" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Settings role={'Doctor'}/></>}/>
+        <Route path='/Profile' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Profile role={'Admin'}/></>}/>
+        <Route path="/Dashboard" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Dashboard role={'Admin'}/></>}/>
+        <Route path="/Settings" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Settings role={'Admin'}/></>}/>
       </Routes>
     </Router>
 
