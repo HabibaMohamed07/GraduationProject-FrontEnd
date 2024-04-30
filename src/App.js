@@ -34,7 +34,7 @@ import Settings from "./settings.tsx";
 import DoctorsPatientListView from "./Dashboard/src/Doctor/PatientsListView.tsx";
 import PatientDetails from "./Dashboard/src/Doctor/PatientDetails.tsx";
 import AddingComment from "./Dashboard/src/Doctor/AddComment.tsx";
-import  Game  from "./3JS/tennis.jsx";
+import  Game  from "./3JS/Game.jsx";
 import GameCalendar from "./Dashboard/src/Patient/GameCalendar.jsx";
 import Targets from "./Dashboard/src/Patient/Targets.jsx";
 import TreatmentProgress from "./Dashboard/src/Patient/TreatmentProgress.jsx";

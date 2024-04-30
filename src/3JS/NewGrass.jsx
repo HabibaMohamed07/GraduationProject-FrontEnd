@@ -5,7 +5,8 @@ Command: npx gltfjsx@6.2.16 newGrass.glb
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
-
+import { FruitBasketModel } from './FruitBasket'
+import { VeggieBasketModel } from './VeggieBasket'
 export default function NewGrassModel(props) {
   const { nodes, materials } = useGLTF('/newGrass.glb')
   return (
@@ -14,6 +15,8 @@ export default function NewGrassModel(props) {
         <mesh geometry={nodes.sc_grass_clump_03_high011.geometry} material={materials['Sc Grass 01']} />
         <mesh geometry={nodes.sc_grass_clump_03_high011_1.geometry} material={materials['Sc type D']} />
         <mesh geometry={nodes.sc_grass_clump_03_high011_2.geometry} material={materials['Sc type D dead']} />
+        <FruitBasketModel/>
+        <VeggieBasketModel/>
       </group>
     </group>
   )
