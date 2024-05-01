@@ -103,7 +103,7 @@ export default function PatientDetails()
         spacing={4}
        
       >
-      <div className="grid-one-item grid-common grid-c2 " style={{position:'relative',margin:'10vh',height:'auto',width:'100%'}}>
+      <div className="grid-one-item grid-common grid-c2 " style={{position:'relative',margin:'10vh',height:'auto',width:'100%' ,maxWidth:'900px'}}>
         
 
         <div className="grid-content ">
@@ -188,7 +188,7 @@ export default function PatientDetails()
 
       </div>
       
-      <Card sx={{ backgroundColor: 'rgb(4,12,24)', mb: 2 , left:'10vh'}}>
+      <Card sx={{ backgroundColor: 'rgb(4,12,24)', mb: 2 , left:'10vh',maxWidth:'900px'}}>
           <Box sx={{ mb: 1 }}>
             <Typography level="title-md">Required Papers</Typography>
             <Typography level="body-sm">

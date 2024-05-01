@@ -63,7 +63,7 @@ function App() {
         <Route path='/Profile-Patient' element={<ProfilePatient/>}/>
         <Route path='/Profile-Admin' element={<ProfileAdmin/>}/>
         <Route path='/Profile-Doctor' element={<ProfileDoctor/>}/>
-        <Route path='/game' element={<SelectGame/>}/>
+        <Route path='/selectgame' element={<> <div className="black"><Navbar isLoggedIn={true}/></div><SelectGame/></>}/>
         <Route path='/AssignDoctor' element={<><div className="black"><Navbar isLoggedIn={true}/></div><AssignDoctor/></>}/>
         <Route path='/DoctorDetails' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorDetails/></>} />
         <Route path='/PatientDetails' element={<><div className="black"><Navbar isLoggedIn={true}/></div><PatientDetails/></>} />

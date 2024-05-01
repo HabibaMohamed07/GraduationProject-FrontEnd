@@ -82,6 +82,11 @@ const Navbar = ({ isLoggedIn }) => {
                 <a>Home</a>
               </p>
             </Link>
+            <Link to="/Dashboard">
+              <p>
+                <a>Dashboard</a>
+              </p>
+            </Link>
             <p>
               <a href="#sec2">What is MindMend?</a>
             </p>

@@ -6,3 +6,30 @@
     /* Adjust as needed */
 }
 
+body{
+    background-color: rgb(4,12,24);
+}
+.ImageStyle{ 
+    position:relative;
+    left:65%;
+    top:-30%;
+    height:300px;
+    width:300px;
+
+    filter: brightness(0) invert(1);
+}
+
+.Progress{
+    position:'relative';
+    left:60%;
+    top:-4%;
+    height:200px;
+    width:400px;
+}
+.ImageProp{
+    position:relative;
+    left:65%;
+    top:-30%;
+    height:300px;
+    width:300px;
+}

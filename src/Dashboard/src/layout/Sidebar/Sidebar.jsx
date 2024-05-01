@@ -7,6 +7,8 @@ import { SidebarContext } from '../../context/sidebarContext';
 import { Link, useLocation } from 'react-router-dom';
 import {navigationLinksDoctor} from '../../data/dataDoctor';
 import { navigationLinksAdmin } from '../../data/dataAdmin';
+import { Icon } from '@mui/material';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 const Sidebar = ({role}) => {
   const [activeLinkIdx, setActiveLinkInd] = useState("");
   const [sidebarClass, setSidebarClass] = useState("");
@@ -40,20 +42,23 @@ if (role=='Patient'){
 
       <nav className="navigation">
         <ul className="nav-list">
-          {navigationLinks.map((navigationLink) => (
+        {navigationLinks.map((navigationLink) => {
+          
+        return (
             <li className="nav-item" key={navigationLink.id}>
-            
                 <Link
-                  to={'/' + navigationLink.title} 
-                  className={`nav-link ${navigationLink.title === activeLinkIdx ? 'active' : ''}`}
-              
+                    to={'/' + navigationLink.link} 
+                    className={`nav-link ${navigationLink.title === activeLinkIdx ? 'active' : ''}`}
                 >
-                  <img src={navigationLink.image} className="nav-link-icon" alt={navigationLink.title} />
-                  <span className="nav-link-text">{navigationLink.title}</span>
+                    <img src={navigationLink.image} className="nav-link-icon" alt={navigationLink.title} />
+                    <span className="nav-link-text">{navigationLink.title}</span>
                 </Link>
-              
             </li>
-          ))}
+        );
+  
+    
+
+})}
         </ul>
       </nav>
     </div>

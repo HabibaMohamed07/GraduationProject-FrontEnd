@@ -75,7 +75,7 @@ button {
     font-size: 14px;
 }
 
-.app {
+        .app {
     display: flex;
     min-height: 100vh;
 }
