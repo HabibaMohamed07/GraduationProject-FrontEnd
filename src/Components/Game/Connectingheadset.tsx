@@ -10,6 +10,8 @@ import ConnectingArmpng from '../../Assets/ConnectingArm.png';
 import ConnectingEEGHEADSET from '../../Assets/eegheadsetgif.gif';
 import Box from "@mui/joy/Box";
 import LinearProgress from '@mui/joy/LinearProgress';
+import Launch from '@mui/icons-material/Launch';
+import Link from '@mui/joy/Link';
 export default function Connectingheadset({onProgressHeadset})
 {
 
@@ -63,15 +65,31 @@ export default function Connectingheadset({onProgressHeadset})
      
         <Button onClick={()=>headsetConnecting()} variant='outlined' sx={{ '&:hover': { backgroundColor: 'green', color:"#ffff" ,borderColor:'green', transition:'background-color 0.4s linear' }, height:'40px' ,width:'400px', position:'relative', top:'270%' , left:'-290px'}}>Connect to Headset</Button>
       
-        <div style={{ position:'relative',left:'-30%', top:'80%'}}>
+        <div style={{ position:'relative',left:'-15%', top:'60%'}}>
         <ol style={{color:'white' }}>
-            <li>Check the arm is connected to the electricity </li>
-            <br />
-            <li>Check the arm is connected to the electricity</li>
-            <br />
-            <li>Check the button is connected to the arm</li>
-        </ol>
+            <li>Check you have installed 
+              <Link href="https://www.emotiv.com/products/emotiv-launcher" target="_blank" rel="noopener noreferrer" startDecorator={<Launch />}>
+              EMOTIV Launcher 
+              </Link>
+               & conncted to it Via Dongle or USB cable
 
+            </li>
+            <br />
+            <li>Check you have placed the headset in the right    
+            <Link 
+            href="https://emotiv.gitbook.io/epoc-x-user-manual/introduction/introduction-to-epoc-x/coverage"
+            target="_blank"
+            rel="noopener noreferrer"
+            endDecorator={<Launch/>} 
+            sx={{paddingLeft:'5px'}}> placements</Link>  </li>
+            <br />
+            <li>Check the headset is charged (preferably to be 100%)</li>
+          
+            
+            
+        </ol>
+       
+       
         </div>
   
        

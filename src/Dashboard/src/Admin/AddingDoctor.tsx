@@ -16,9 +16,48 @@ import Snackbar from '@mui/joy/Snackbar';
 import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
 import { Alert } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import axios from 'axios';
+
+
+
+interface FormElements extends HTMLFormControlsCollection {
+  email: HTMLInputElement;
+  name: HTMLInputElement;
+  number: HTMLInputElement;
+}
+interface AddDoctor extends HTMLFormElement {
+  readonly elements: FormElements;
+}
+
+
+
+
+
+
 export default function AddDoctor() {
     const [open, setOpen] = React.useState(false);
-
+    const [data, setData] = React.useState({
+      email:'',
+      name:'',
+      password:'',
+      age:0,
+      phoneNumber:'',
+      gender:'',
+      patientHistory:''
+    });
+    function  handleAddingDocotr()
+    {
+      console.log("Data: ", data);
+      axios.post("https://localhost:7291/AddDoctor",data)
+  .then(function(response)
+  {
+console.log(response.data)
+if (response.status === 200){
+  setOpen(true)
+}
+  })
+    }
+    
     useEffect(() => {
         const timeout = setTimeout(() => {
           setOpen(false); // Set open to false after 5 seconds
@@ -50,29 +89,51 @@ export default function AddDoctor() {
           gap: 1.5,
         }}
       >
-        <FormControl sx={{ gridColumn: '1/-1' }}>
+         <form
+                onSubmit={(event: React.FormEvent<AddDoctor>) => {
+                  event.preventDefault();
+                  const formElements = event.currentTarget.elements;
+                  const data = {
+                    email: formElements.email.value,
+                    password:formElements.email.value.split("@")[0]+'@'+24,
+                    name: formElements.name.value,
+                    age: 0,
+                    phoneNumber: formElements.number.value,
+                    gender:"male",
+                    patientHistory:"String"
+                  };
+                  alert(JSON.stringify(data, null, 2));
+                  setData(data)
+                  
+                  handleAddingDocotr()
+                }}
+              >
+        <FormControl sx={{ gridColumn: '1/-1',width:'200%' }} required>
           <FormLabel>Doctor Name</FormLabel>
-          <Input/>
+          <Input name="name"/>
         </FormControl>
-        <FormControl>
+        <br/>
+        <FormControl required sx={{width:"200%"}}>
           <FormLabel>Phone Number</FormLabel>
-          <Input  />
+          <Input name="number" />
         </FormControl>
-        <FormControl>
+        <br />
+        <FormControl required sx={{width:'200%'}}>
           <FormLabel>Email</FormLabel>
-          <Input />
+          <Input  type="email" name="email" />
         </FormControl>
-       
-      
-        <CardActions sx={{ gridColumn: '1/-1' }}>
-        <Stack sx={{ width: '100%' }} spacing={2}>
+        <br />
+        <Stack sx={{ width: '200%' }} spacing={2}>
      
-          <Button variant="solid" color="primary"  onClick={()=>setOpen(true)}>
-            Add Doctor
-          </Button>
-          <Alert  severity="success" style={{display:open?"":'none'}}  onClose={() => setOpen(false)}>Added Doctor</Alert>
-          </Stack>
-        </CardActions>
+     <Button variant="solid" color="primary"  type="submit" >
+       Add Doctor
+     </Button>
+
+     <Alert  severity="success" style={{display:open?"":'none'}}  onClose={() => setOpen(false)}>Added Doctor</Alert>
+     </Stack>
+        </form>
+    
+     
       </CardContent>
   
     </Card>

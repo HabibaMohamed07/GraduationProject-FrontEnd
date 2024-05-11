@@ -14,7 +14,7 @@ const options = ['Habiba Mohamed', 'Mina Antoun','Medhat','Shaden'];
 
 
 
-export default function AssignDoctor() {
+export default function AssignDoctor({user}) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState<string | null>(options[0]);
   const [inputValue, setInputValue] = React.useState('');
@@ -23,7 +23,7 @@ export default function AssignDoctor() {
   console.log(recieved.receivedObject.doctor.DoctorName)
   return (
     <div className="app profile">
-    <Sidebar role={'Admin'} />
+    <Sidebar user={user} role={'Admin'} />
 
     <div>
   <div className="subgrid-two-item grid-common grid-c7 scroll" style={{position:'relative',margin:'30vh',height:'auto',width:'100%'}}>

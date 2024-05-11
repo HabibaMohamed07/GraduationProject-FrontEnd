@@ -32,6 +32,40 @@ def increase_headset_progress():
         
         time.sleep(3)  # Adjust the sleep time as needed
 
+
+
+
+
+
+@app.route("/Left", methods=["POST"])
+def movingleft():
+    
+    from python_script import connect_to_device_l
+    from python_script2 import connect_to_device_r
+
+    try:
+        connect_to_device_l()
+    except Exception as e:
+        print("Error:", e)
+    return "Left Arm Move"  
+
+@app.route("/Right", methods=["POST"])
+def movingright():
+  
+    from python_script import connect_to_device_l
+    from python_script2 import connect_to_device_r
+   
+    try:
+        connect_to_device_r()
+    except Exception as e:
+        print("Error:", e)
+      
+    return "Right Arm Move"  
+
+
+
+
+
 @app.route("/connect", methods=["POST"])
 def connect():
     handle_connect()
@@ -79,6 +113,35 @@ def get_headsetprogress():
     global headsetprogress_percentage
     print("Fetching headsetprogress:", headsetprogress_percentage)
     return jsonify({"headsetconnection": headsetprogress_percentage})
+
+
+@app.route('/model', methods=['GET'])
+def model():
+    # Here you can implement your model or dummy logic to generate predictions
+    # For this example, let's assume the model predicts the result as "Left"
+    result = "Left"
+    return jsonify({"result": result})
+
+
+from flask import request
+import random
+@app.route('/generate', methods=['POST'])
+def generate():
+    input_data = request.json.get('input')  # Assuming input is sent in JSON format
+    if input_data == 'Left':
+        choices = ['Left', 'Right']
+        probabilities = [0.6, 0.4]
+    elif input_data == 'Right':
+        choices = ['Right', 'Left']  # Reversed order for right input
+        probabilities = [0.6, 0.4]
+    else:
+        return jsonify({'error': 'Invalid input'}), 400
+
+    result = random.choices(choices, weights=probabilities, k=1)[0]
+    return jsonify({'result': result}), 200
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

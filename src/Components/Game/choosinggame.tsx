@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import tennis from '../../Assets/tennis.jpg';
+import { Link } from 'react-router-dom';
 const images = [
   {
     url: tennis,
     title: 'Tennis',
     width: '40%',
+    link:'/game'
   },
   {
     url: '/static/images/buttons/burgers.jpg',
@@ -88,17 +91,24 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 export default function ButtonBaseDemo() {
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
+    <>
+    <Stack>
+    <div style={{paddingBottom:'30%'}}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' , position:'relative', top:"80%" }}>
       {images.map((image) => (
+        
         <ImageButton
           focusRipple
           key={image.title}
           style={{
             width: image.width,
           }}
+          
         >
+          <Link to='/game'>
           <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
           <ImageBackdrop className="MuiImageBackdrop-root" />
+
           <Image>
             <Typography
               component="span"
@@ -115,8 +125,13 @@ export default function ButtonBaseDemo() {
               <ImageMarked className="MuiImageMarked-root" />
             </Typography>
           </Image>
+          </Link>
         </ImageButton>
+       
       ))}
     </Box>
+    </div>
+    </Stack>
+    </>
   );
 }

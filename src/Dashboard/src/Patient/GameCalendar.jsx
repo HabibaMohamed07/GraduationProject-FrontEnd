@@ -3,10 +3,10 @@ import Subscriptions from '../components/Subscriptions/Subscriptions'
 import Sidebar from '../layout/Sidebar/Sidebar';
 
 
-const GameCalendar = () => {
+const GameCalendar = ({user}) => {
     return (
       <div>
-        <Sidebar role="Patient"  />
+        <Sidebar user={user} role="Patient"  />
         <Subscriptions />
       </div>
     );

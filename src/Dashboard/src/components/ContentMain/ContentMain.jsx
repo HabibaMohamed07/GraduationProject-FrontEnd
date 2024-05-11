@@ -9,18 +9,19 @@ import Loans from "../Loans/Loans";
 import Financial from "../Financial/Financial";
 import PatientList from "../Loans/PatientList";
 import DoctorList from "../Loans/DoctorList";
-const ContentMain = ({role}) => {
+const ContentMain = ({user,role}) => {
+  console.log("ContentMain: ",role)
   if(role=='Patient')
   {
   return (
     <div className="main-content-holder">
         <div className="content-grid-one">
             <Cards />
-            <Transactions role={role} />
+            <Transactions  user={user} role={role} />
             <Report />
         </div>
         <div className="content-grid-two">
-            <Budget />
+            <Budget user={user}/>
             <div className="grid-two-item">
               <div className="subgrid-two">
                 <Subscriptions role={role}/>
@@ -43,7 +44,7 @@ const ContentMain = ({role}) => {
     return (
       <>
       <div style={{display:'grid',width:'100%'}}>
-      <Transactions role={role}/>
+      <Transactions user={user} role={role}/>
 
       </div>
       
@@ -52,17 +53,17 @@ const ContentMain = ({role}) => {
          
           </div>
           <div className="content-grid-two">
-              <Budget />
+              <Budget user={user}/>
               <div className="grid-two-item">
                 <div className="subgrid-two">
-                  <Subscriptions role={role} />
+                  <Subscriptions  role={role} />
        
                 </div>
               </div>
   
               <div className="grid-two-item">
                 <div className="subgrid-two">
-                  <PatientList />
+                  <PatientList  user={user} role={role} />
 
                 </div>
               </div>
@@ -80,7 +81,7 @@ const ContentMain = ({role}) => {
     return (
       <>
       <div style={{display:'grid',width:'100%'}}>
-      <Transactions role={role}/>
+      <Transactions  user={user} role={role}/>
 
       </div>
       
@@ -101,7 +102,7 @@ const ContentMain = ({role}) => {
                 <div className="subgrid-two">
                   
                
-                  <PatientList/>
+                  <PatientList user={user} role={role}/>
                   </div>
                
               </div>

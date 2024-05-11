@@ -1,8 +1,9 @@
 import "./Budget.css";
 import { iconsImgs } from "../../utils/images";
 import { budget } from "../../data/dataPatient";
-
-const comments = [
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
+var comments = [
   "There is a significant progress in the right hand functionality",
   "Excellent progress in the patient's recovery",
   "Patient's condition is stable",
@@ -18,7 +19,21 @@ const comments = [
   
 ];
 
-const Budget = () => {
+const Budget = ({user}) => {
+  console.log('user',user['id'])
+  axios.get("https://localhost:7291/GetAllCommentsByDoctorId?id="+user['id']).then
+  (res=>
+    {
+      if(res.data['data']!=null)
+    
+      {
+
+        comments=res.data['data']
+      }
+      else{
+        // comments=["No Comments were added by this Doctor"]
+      }
+    })
   return (
     <div className="grid-two-item grid-common grid-c4">
       <div className="grid-c-title">

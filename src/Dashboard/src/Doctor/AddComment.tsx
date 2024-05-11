@@ -23,7 +23,7 @@ type MessagesPaneProps = {
   };
 
       
-export default function AddingComment()
+export default function AddingComment({user})
 { const location = useLocation();
     const navigate=useNavigate();
     const [textAreaValue, setTextAreaValue] = React.useState('');
@@ -33,7 +33,7 @@ export default function AddingComment()
     return(
         <>
         <div className="app profile">
-        <Sidebar role={'Doctor'} />
+        <Sidebar user={user} role={'Doctor'} />
          
       <div className="grid-one-item grid-common grid-c2 " style={{position:'relative',margin:'10vh',height:'100%',width:'100%'}}>
         

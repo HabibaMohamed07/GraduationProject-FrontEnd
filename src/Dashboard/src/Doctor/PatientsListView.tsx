@@ -16,7 +16,7 @@ import Sidebar from '../layout/Sidebar/Sidebar';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
-export default function DoctorsPatientListView(){
+export default function DoctorsPatientListView({user}){
     interface Column {
         id: 'PatientName' | 'PhoneNumber' | 'DoctorAssignedTo'|'Email';
         label: string;
@@ -98,7 +98,7 @@ export default function DoctorsPatientListView(){
         
     return(
 <div className="app profile">
-    <Sidebar role={'Doctor'} />
+    <Sidebar user={user} role={'Doctor'} />
 
 
 

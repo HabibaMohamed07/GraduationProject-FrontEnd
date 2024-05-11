@@ -9,7 +9,7 @@ import {navigationLinksDoctor} from '../../data/dataDoctor';
 import { navigationLinksAdmin } from '../../data/dataAdmin';
 import { Icon } from '@mui/material';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-const Sidebar = ({role}) => {
+const Sidebar = ({user,role}) => {
   const [activeLinkIdx, setActiveLinkInd] = useState("");
   const [sidebarClass, setSidebarClass] = useState("");
   const { isSidebarOpen } = useContext(SidebarContext);
@@ -38,7 +38,7 @@ if (role=='Patient'){
       <div className="info-img img-fit-cover">
         <img src={personsImgs.person_two} alt="profile image" />
       </div>
-      <span className="info-name">Habiba Mohamed</span>
+      <span className="info-name">Habiba</span>
 
       <nav className="navigation">
         <ul className="nav-list">
@@ -66,12 +66,13 @@ if (role=='Patient'){
           }
 else if(role=='Doctor')
 {
+  console.log("sidebar user :", user)
   return (
     <div className={`sidebar ${sidebarClass}`}>
       <div className="info-img img-fit-cover">
         <img      src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286" alt="profile image" />
       </div>
-      <span className="info-name">Dr. Mina Antoun</span>
+      <span className="info-name">Dr. {user['name']} </span>
 
       <nav className="navigation">
         <ul className="nav-list">
@@ -101,7 +102,7 @@ else if(role=='Admin')
       <div className="info-img img-fit-cover">
         <img src="https://images.unsplash.com/flagged/photo-1573603867003-89f5fd7a7576?q=80&w=1946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="profile image" />
       </div>
-      <span className="info-name">Dr. Nashaat Amir</span>
+      <span className="info-name">Dr. {user['name']}</span>
 
       <nav className="navigation">
         <ul className="nav-list">

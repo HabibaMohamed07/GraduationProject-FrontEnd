@@ -65,13 +65,13 @@ export default function ConnectingArm({onProgress})
      
         <Button onClick={()=>handleClick()} variant='outlined' sx={{ '&:hover': { backgroundColor: 'green', color:"#ffff" ,borderColor:'green', transition:'background-color 0.4s linear' }, height:'40px' ,width:'400px', position:'relative', top:'270%' , left:'-290px'}}>Connect to Arm</Button>
       
-        <div style={{ position:'relative',left:'-30%', top:'80%'}}>
+        <div style={{ position:'relative',left:'-23%', top:'80%'}}>
         <ol style={{color:'white' }}>
-            <li>Check the arm is connected to the electricity </li>
+            <li>Verify the robotic arm's connection to a power source </li>
             <br />
-            <li>Check the arm is connected to the electricity</li>
+            <li>Ensure the power is switched on & turn on the bluetooth on your pc</li>
             <br />
-            <li>Check the button is connected to the arm</li>
+            <li>Connect the gloves to the computer via USB cable</li>
         </ol>
 
         </div>

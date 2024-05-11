@@ -50,7 +50,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function PatientListPageContent() {
+export default function PatientListPageContent({user}) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -65,7 +65,7 @@ export default function PatientListPageContent() {
 
   return (
     <div className="app profile">
-    <Sidebar role={'Admin'} />
+    <Sidebar user={user} role={'Admin'} />
     <Box sx={{ width: '100%' ,height:'auto' ,backgroundColor:'rgb(4,12,24)'}}>
       <AppBar position="static" sx={{backgroundColor:'#232933'}}>
         <Tabs

@@ -68,7 +68,7 @@ export default function SelectGame() {
             {activeStep==2&&(
             <Choosinggame/>
             )}
-        <Stepper sx={{ width: '100%' }}>
+        <Stepper sx={{ width: '100%' ,position:"relative"}}>
         {steps.map((step, index) => (
           <Step
           

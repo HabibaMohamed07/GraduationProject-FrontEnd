@@ -3,7 +3,8 @@ import { transactions } from "../../data/dataPatient";
 import { iconsImgs } from "../../utils/images";
 import profilepic from "../../assets/images/person_two.jpg";
 
-const Transactions = ({role}) => {
+const Transactions = ({user,role}) => {
+  console.log("user From Transactions:",user['name'])
   if (role == "Patient") {
     return (
       <div className="grid-one-item grid-common grid-c2 " >
@@ -24,7 +25,7 @@ const Transactions = ({role}) => {
                   </div>
                   <p className="text">
                     {" "}
-                    Habiba Mohamed Abdelrahman Salem<span> 22 Years Old</span>
+                    {user['name']}<span> </span>
                   </p>
                 </div>
                 <div className="grid-item-r">
@@ -54,11 +55,11 @@ const Transactions = ({role}) => {
                   <div className="avatar img-fit-cover">
                     <img  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286" alt="" />
                   </div>
-                  <p className="text"> Dr. Mina Antoun </p>
+                  <p className="text"> Dr.{user['name']} </p>
                 </div>
              
                 <div className="grid-item-r">
-                  <span className="text-scarlet"> Supervising 10 patients</span>
+                  <span className="text-scarlet"> Supervising {user['numOfPatients']} patients</span>
                 </div>
               </div>
             }

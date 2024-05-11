@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState,useEffect} from 'react';
 import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import CssBaseline from '@mui/joy/CssBaseline';
@@ -19,10 +19,12 @@ import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 import GoogleIcon from './GoogleIcon.tsx';
 import Mountain from '../Assets/Mountain.avif';
 import Signup from '../SignUp/Signup.js';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate} from 'react-router-dom';
 import Navbar from '../LandingPage/navbar/Navbar.js';
 import FormPng  from "../Assets/Robot-Hand.jpg";
 import SignIn from '../Assets/SignIn.png';
+import axios from 'axios';
+import {jwtDecode}  from 'jwt-decode'
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
@@ -32,39 +34,42 @@ interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
-// function ColorSchemeToggle(props: IconButtonProps) {
-//   const { onClick, ...other } = props;
-//   const { mode, setMode } = useColorScheme();
-//   const [mounted, setMounted] = React.useState(false);
-//   React.useEffect(() => {
-//     setMounted(true);
-//   }, []);
-//   if (!mounted) {
-//     return <IconButton size="sm" variant="outlined" color="neutral" disabled />;
-//   }
-//   return (
-//     <IconButton
-//       id="toggle-mode"
-//       size="sm"
-//       variant="outlined"
-//       color="neutral"
-//       aria-label="toggle light/dark mode"
-//       {...other}
-//       onClick={(event) => {
-//         if (mode === 'light') {
-//           setMode('dark');
-//         } else {
-//           setMode('light');
-//         }
-//         onClick?.(event);
-//       }}
-//     >
-//       {mode === 'light' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
-//     </IconButton>
-//   );
-// }
 
 export default function JoySignInSideTemplate() {
+
+  const navigate = useNavigate();
+  const [logindata, setLoginData] = useState({
+    email:'',
+   
+    password:'',
+   
+  });
+  function handleNavigation (data:any)  {
+    axios.post("https://localhost:7291/LoginAsync",data).then(function(response)
+    {
+      console.log(data);
+      console.log(response.data.isSuccess);
+      if(response.data.isSuccess)
+    { 
+      var token= response.data.message;
+      var user= jwtDecode(token)
+      var role=user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+     
+      console.log(token)
+      console.log(response.data)
+      localStorage.setItem('userToken',token);
+      navigate('/Dashboard');
+    }
+    else{
+      alert("Wrong Email or Password")
+    }
+  }) 
+    // Replace '/another-link' with the desired URL
+  
+  };
+
+
+
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />
@@ -181,12 +186,12 @@ export default function JoySignInSideTemplate() {
                 onSubmit={(event: React.FormEvent<SignInFormElement>) => {
                   event.preventDefault();
                   const formElements = event.currentTarget.elements;
-                  const data = {
-                    email: formElements.email.value,
-                    password: formElements.password.value,
-                    persistent: formElements.persistent.checked,
-                  };
-                  alert(JSON.stringify(data, null, 2));
+                  const data={
+                    email : formElements.email.value,
+                    password: formElements.password.value
+                  }
+                  handleNavigation(data)
+
                 }}
               >
                 <FormControl required>
@@ -208,11 +213,11 @@ export default function JoySignInSideTemplate() {
                     <Checkbox size="sm" label="Remember me" name="persistent" />
                     
                   </Box>
-                  <Link to='/Dashboard'>
+                
                     <Button type="submit" fullWidth>
                     Sign in
                   </Button>
-                  </Link>
+                  
                 </Stack>
               </form>
             </Stack>

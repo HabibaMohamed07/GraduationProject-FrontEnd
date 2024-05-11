@@ -43,10 +43,12 @@ import { Grid } from "@mui/material";
 import './Signup.css';
 import Navbar from "../LandingPage/navbar/Navbar.js";
 import { Maximize } from "@mui/icons-material";
+import axios from "axios";
 
 interface FormElements extends HTMLFormControlsCollection {
   //step 1
   email: HTMLInputElement;
+  name: HTMLInputElement;
   password: HTMLInputElement;
   Age: HTMLInputElement;
   PhoneNumber: HTMLInputElement;
@@ -83,47 +85,30 @@ interface SignInFormElement extends HTMLFormElement {
   readonly elements: FormElements;
 }
 
-// function ColorSchemeToggle(props: IconButtonProps) {
-//   const { onClick, ...other } = props;
-  
-//   const { mode, setMode } = useColorScheme();
-//   const [mounted, setMounted] = React.useState(false);
-//   React.useEffect(() => {
-//     setMounted(true);
-//   }, []);
-//   if (!mounted) {
-//     return <IconButton size="sm" variant="outlined" color="neutral" disabled />;
-//   }
-//   return (
-//     <IconButton
-//       id="toggle-mode"
-//       size="sm"
-//       variant="outlined"
-//       color="neutral"
-//       aria-label="toggle light/dark mode"
-//       {...other}
-//       onClick={(event) => {
-//         if (mode === "light") {
-//           setMode("dark");
-//         } else {
-//           setMode("light");
-//         }
-//         onClick?.(event);
-//       }}
-//     >
-//       {mode === "light" ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
-//     </IconButton>
-//   );
-// }
+
 const steps = ["Personal Information", "Patient's History", "Subscription"];
 export default function JoySignInSideTemplate() {
-    // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [value, setValue] = React.useState('female');
-    // const [selectedValue, setSelectedValue] = React.useState("Left"); // Initialize selectedValue state
-    
-    // const[issubmitted,setSubmit]=React.useState('false');
+    const [data, setData] = React.useState({
+      email:'',
+      name:'',
+      password:'',
+      age:0,
+      phoneNumber:'',
+      gender:'',
+      patientHistory:''
+    });
+    function handlesubmit()
+{
   
-  
+  if(activeStep==1&&questionIndex==2){
+  axios.post("https://localhost:7291/RegisterAsync",data)
+  .then(function(response)
+  {
+console.log(response.data)
+  })
+}
+}
     const [options, setOptions] = React.useState({
         IsPatientWork:false,
         IsPatientSurgery:false,
@@ -310,20 +295,26 @@ export default function JoySignInSideTemplate() {
                 onSubmit={(event: React.FormEvent<SignInFormElement>) => {
                   event.preventDefault();
                   const formElements = event.currentTarget.elements;
-                  const data = {
+                  setData((prevData) => ({
+                    ...prevData,
                     email: formElements.email.value,
+                    name:formElements.name.value,
                     password: formElements.password.value,
                     age: formElements.Age.value,
-                    Phonenumber: formElements.PhoneNumber.value,
-                    Gender:formElements.Gender.value,
-                  };
-                  alert(JSON.stringify(data, null, 2));
+                    phoneNumber: formElements.PhoneNumber.value,
+                    gender: formElements.Gender.value
+                  }));
+                  // alert(JSON.stringify(data, null, 2));
                   handleNext();
                 }}
               >
                 <FormControl required>
                   <FormLabel>Email</FormLabel>
                   <Input type="email" name="email" />
+                </FormControl>
+                <FormControl required>
+                  <FormLabel>Name</FormLabel>
+                  <Input type="text" name="name" />
                 </FormControl>
                 <FormControl required>
                   <FormLabel>Password</FormLabel>
@@ -373,50 +364,44 @@ export default function JoySignInSideTemplate() {
                onSubmit={(event: React.FormEvent<SignInFormElement>) => {
     event.preventDefault();
     const formElements = event.currentTarget.elements;
-    let data = {};
+    
+    // let data = { ...data }; // Assuming initialData holds other fields
+
     if (questionIndex === 0) {
-      data = {
-        IsPatientWork: formElements.IsPatientWork.checked,
+      const medicaldata1 = {
+        IsPatientWork: formElements.IsPatientWork.checked?formElements.Job.value:'',
         Heart: formElements.Heart.value,
         Kidney: formElements.Kidney.value,
         Lung: formElements.Lung.value,
         AutoImmune: formElements.AutoImmune.value,
       };
-      if (formElements.IsPatientWork.checked) {
-        data.Job = formElements.Job.value;
-    }
-    else{
-      data.Job='';
-    }
+     
+
+      data.patientHistory += Object.values(medicaldata1).join('@');
     } else if (questionIndex === 1) {
-      data = {
-        IsPatientSurgery: formElements.IsPatientSurgery.checked,
+      const medicaldata2 = {
+        IsPatientSurgery: formElements.IsPatientSurgery.checked?formElements.Surgery.value:'',
         Accident: formElements.Accident.value,
         Medications: formElements.Medications.value,
         MedicationsDetails: formElements.MedicationsDetails.value,
         Smoke: formElements.Smoke.value,
         Alcohol: formElements.Alcohol.value,
       };
-      if(formElements.IsPatientSurgery.checked){
-        data.Surgery=formElements.Surgery.value;
-      }
-      else{
-        data.Surgery='';
-      }
-      
+     
+      data.patientHistory += '@' + Object.values(medicaldata2).join('@');
     } else if (questionIndex === 2) {
-      data = {
+      const medicaldata3 = {
         WalkWithoutAssitance: formElements.WalkwithoutAssistance.value,
         UnderstandingLang: formElements.UnderstandingLang.value,
         Graspobject: formElements.Graspobject.value,
         TurnHead: formElements.TurnHead.value,
-        patientstrugglewith:formElements.patientstruggle[0].innerHTML,
+        patientstrugglewith: formElements.patientstruggle[0].innerHTML,
       };
-     
+      data.patientHistory += '@' + Object.values(medicaldata3).join('@');
     }
-    alert(JSON.stringify(data, null, 2));
+
+    // alert(JSON.stringify(data, null, 2));
     handleNext();
-   
   }}
 
               >
@@ -701,7 +686,7 @@ export default function JoySignInSideTemplate() {
                    Back
                   </Button>
                 
-                        <Button type="submit" fullWidth>
+                        <Button type="submit" onClick={handlesubmit} fullWidth>
                    Next
                   </Button>
                     
@@ -871,7 +856,7 @@ sx={{
       </Box>
       <Box
         sx={(theme) => ({
-          height: "107%",
+          height: "118%",
           position: "absolute",
           zIndex: -1,
           right: 0,
@@ -895,12 +880,12 @@ sx={{
       {/* dev mode */}
       <div>
         {/* Next button */}
-        <button onClick={handleNext} disabled={activeStep === totalSteps - 1}>
+        {/* <button onClick={handleNext} disabled={activeStep === totalSteps - 1}>
           Next
         </button>
         <button onClick={handleBack} disabled={activeStep === 0}>
           Back
-        </button>
+        </button> */}
       </div>
     </CssVarsProvider>
   );

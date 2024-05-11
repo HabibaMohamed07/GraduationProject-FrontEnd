@@ -11,21 +11,20 @@ export default function Tennismodel({props,brainsignal}) {
   console.log('brainsignal: ',brainsignal)
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('/LeftServe.glb')
-  const { actions } = useAnimations(animations, group)
+  const { actions,mixer  } = useAnimations(animations, group)
   useEffect(() => {
-    
-    console.log('actions',actions);
-  if(brainsignal==='Left'){
-    console.log("The user has to do a Left Motion");
-  actions.sidehit.play().setLoop(THREE.LoopOnce ,1);
-  actions.ballaction.play().setLoop(THREE.LoopOnce ,1);
-}
-else{
-  console.log("The game hasn't started yet");
-}
-})
+    console.log('actions', actions);
+    if (brainsignal === 'Left') {
+      console.log("The user has to do a Left Motion");
+      actions.sidehit.reset().play().setLoop(THREE.LoopOnce, 1).clampWhenFinished = true;
+      actions.ballaction.reset().play().setLoop(THREE.LoopOnce, 1).clampWhenFinished = true;
+    } else {
+      console.log("The game hasn't started yet");
+    }
+  }, [brainsignal, actions]);
+
   return (
-  
+    
     <group ref={group} {...props} dispose={null} scale={[1.5,1.5,1.5]} position={[0,-1,0]}>
       <group name="Scene">
         <group name="Empty" position={[-0.509, 0.158, 1.487]} rotation={[2.975, -0.111, 2.038]} scale={[0.33, 0.141, 0.328]}>

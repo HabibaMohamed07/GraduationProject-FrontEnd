@@ -67,7 +67,7 @@ const rows = [
    
    
   ];
-export default function PatientDetails()
+export default function PatientDetails({user})
 {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -97,7 +97,7 @@ export default function PatientDetails()
   
     return (
         <div className="app profile">
-        <Sidebar role={'Doctor'} />
+        <Sidebar user={user} role={'Doctor'} />
     
         <Stack
         spacing={4}
@@ -172,7 +172,7 @@ export default function PatientDetails()
                 
             </div>
             <div className="scroll">
-            <Budget />
+            <Budget user={user}  />
             </div>
     <Button onClick={()=>handleClick()} variant="contained" sx={{marginTop:'10px'}} color="success">
         Add

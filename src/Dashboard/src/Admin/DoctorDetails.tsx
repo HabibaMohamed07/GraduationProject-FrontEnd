@@ -14,7 +14,7 @@ import { purple } from '@mui/material/colors';
 import './DoctorList.css';
 
 
-export default function DoctorDetails() {
+export default function DoctorDetails({user}) {
     const navigate=useNavigate();
     const location = useLocation();
     const receivedObject = location.state;
@@ -29,7 +29,7 @@ export default function DoctorDetails() {
   
     return (
         <div className="app profile">
-        <Sidebar role={'Admin'} />
+        <Sidebar user={user} role={'Admin'} />
     
  
       <div className="grid-one-item grid-common grid-c2 " style={{position:'relative',margin:'10vh',height:'auto',width:'100%'}}>
