@@ -42,6 +42,9 @@ export function TennisModel({props,data}) {
     console.log("Playing :",data);
     if(data=='Left'){
       if(command==data){
+      
+
+
       actions.PlayerRacketPlayLeft.reset().play().setLoop(THREE.LoopOnce, 1).clampWhenFinished = true;
       actions.GoingRightToOpponent.reset().play().setLoop(THREE.LoopOnce, 1).clampWhenFinished = true;
       // actions.OpponentRacketMoveRight.reset().play().setLoop(THREE.LoopOnce, 1).clampWhenFinished = true;
@@ -105,10 +108,42 @@ export function TennisModel({props,data}) {
 
     const handleKeyDown = (event) => {
       if (event.key === 'ArrowLeft') {
-        setCommand('Left');
+        data={
+          
+            "data":[
+                -0.81176737,
+                0.9683623,
+                -0.59654038,
+                0.06800857,
+                -0.15964,
+                0.03115891,
+                0.23036655,
+                0.43783579
+            ]
+          }
+        console.log(data)
+        axios.post("http://127.0.0.1:5000/predict",data).then(function(response){
+          setCommand(response.data.prediction)
+        })
+        // setCommand('Left');
       } else if (event.key === 'ArrowRight') {
-        setCommand('Right');
-      }
+        data={
+          
+          "data":[
+            0.58038067,
+            -0.74315105,
+            0.96168271,
+            -0.69972196,
+            -0.09325058,
+            0.54750461,
+            0.39829045,
+            0.63713962
+          ]
+        }
+      console.log(data)
+      axios.post("http://127.0.0.1:5000/predict",data).then(function(response){
+        setCommand(response.data.prediction)
+      })}
     };
     console.log("Command: ",command)
     document.addEventListener('keydown', handleKeyDown);
