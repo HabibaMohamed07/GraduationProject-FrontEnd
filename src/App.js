@@ -45,6 +45,7 @@ import Tennis from "./3JS/tennis";
 import {jwtDecode}  from 'jwt-decode'
 import Connecting from './ConnectBackend/backend.jsx';
 import axios from 'axios';
+import { url } from "./config";
 // function App() {
 //   const location = useLocation();
 
@@ -129,8 +130,8 @@ function AppContent() {
       setRole(role)
 
       if (role=="Doctor"||role=='Admin'){ 
-
-      axios.get("https://localhost:7291/GetDoctorOrAdminProfile?uid="+userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+      let geturl=url+"GetDoctorOrAdminProfile?uid=";
+      axios.get(geturl+userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
       .then(
         function(response)
         {
@@ -143,7 +144,8 @@ function AppContent() {
     }
     else if (role=="Patient")
     {
-      axios.get("https://localhost:7291/GetPatientDetails?patientid="+userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
+      let geturl=url+"GetPatientDetails?patientid=";
+      axios.get(geturl+userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
       .then(
         function(response)
         {

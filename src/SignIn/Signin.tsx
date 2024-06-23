@@ -25,6 +25,7 @@ import FormPng  from "../Assets/Robot-Hand.jpg";
 import SignIn from '../Assets/SignIn.png';
 import axios from 'axios';
 import {jwtDecode}  from 'jwt-decode'
+import {url} from '../config.js';
 interface FormElements extends HTMLFormControlsCollection {
   email: HTMLInputElement;
   password: HTMLInputElement;
@@ -45,7 +46,9 @@ export default function JoySignInSideTemplate() {
    
   });
   function handleNavigation (data:any)  {
-    axios.post("https://localhost:7291/LoginAsync",data).then(function(response)
+    console.log(url+"LoginAsync");
+    let poststring=url+"LoginAsync";
+    axios.post(poststring,data).then(function(response)
     {
       console.log(data);
       console.log(response.data.isSuccess);

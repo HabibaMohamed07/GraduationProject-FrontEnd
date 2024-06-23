@@ -90,7 +90,7 @@ const ContentMain = ({user,role}) => {
          
           </div>
           <div className="content-grid-two">
-          <DoctorList />
+          <DoctorList user={user} role={role} />
               <div className="grid-two-item">
                 <div className="subgrid-two">
                   <Subscriptions role={role} />

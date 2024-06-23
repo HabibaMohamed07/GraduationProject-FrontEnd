@@ -1,7 +1,29 @@
 import { iconsImgs } from "../../utils/images";
 import "./Loans.css";
+import { useState,useEffect } from "react";
+import { url } from "../../../../config";
+import axios from "axios";
+const DoctorList = ({user,role}) => {
+  const [doctors, setDoctors] = useState([]);
 
-const DoctorList = () => {
+  useEffect(() => {
+   
+   let geturl=url+"GetAllDoctors";
+    console.log(geturl);
+    console.log("The Role is : "+role);
+    axios.get(geturl)
+    .then(function (response) {
+  
+      const Doctors = response.data.data.map(Doctors => doctors['name']);
+      console.log(Doctors);
+      setDoctors(Doctors);
+    })
+    .catch(function (error) {
+      console.error("Error fetching Doctors:", error);
+    });
+ 
+  }
+  )[user]
   return (
     <div className="subgrid-two-item grid-common grid-c7 scroll" style={{height:'150rem'}}>
         <div className="grid-c-title">
@@ -11,21 +33,9 @@ const DoctorList = () => {
             </button>
         </div>
         <div className="grid-c7-content" style={{position:'relative' , display:'grid' , paddingTop:'40px', gap: '25px'}}>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-          <ul>Dr. Mina Antoun</ul>
-    </div>
+        {doctors.map((doctor, index) => (
+          <ul key={index}>{doctor}</ul>
+        ))}    </div>
     </div>
   )
 }
