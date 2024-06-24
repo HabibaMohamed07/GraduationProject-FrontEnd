@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Sidebar from '../layout/Sidebar/Sidebar';
-
+import Navbar from '../../../LandingPage/navbar/Navbar';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
@@ -97,6 +97,8 @@ export default function DoctorsPatientListView({user}){
       
         
     return(
+      <>
+      <div className="black"><Navbar isLoggedIn={true}user={user}/></div>
 <div className="app profile">
     <Sidebar user={user} role={'Doctor'} />
 
@@ -168,6 +170,7 @@ export default function DoctorsPatientListView({user}){
     </Paper>
  
     </div>
+    </>
   );
  
 }

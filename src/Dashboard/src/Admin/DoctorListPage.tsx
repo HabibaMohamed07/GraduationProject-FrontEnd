@@ -1,14 +1,16 @@
 import React from "react";
 import Sidebar from "../layout/Sidebar/Sidebar";
 import DoctorListPageContent from "./DoctorListPageContent.tsx";
-
-export default function DoctorListPage({user})
+import Navbar from "../../../LandingPage/navbar/Navbar";
+export default function DoctorListPage({user,role})
 {
     return (
-      
+      <>
+   <div className="black"><Navbar isLoggedIn={true} user={user}/></div>
             <div className="app profile">
-              <Sidebar user={user} role={'Admin'} />
-              <DoctorListPageContent/>;
+              <Sidebar user={user} role={role} />
+              <DoctorListPageContent user={user} role={role}/>;
             </div>
+</>
 );
 }

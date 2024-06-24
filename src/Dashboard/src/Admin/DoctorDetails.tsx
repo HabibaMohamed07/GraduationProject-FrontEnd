@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { purple } from '@mui/material/colors';
 import './DoctorList.css';
-
+import Navbar from "../../../LandingPage/navbar/Navbar";
 
 export default function DoctorDetails({user}) {
     const navigate=useNavigate();
@@ -28,6 +28,8 @@ export default function DoctorDetails({user}) {
     };
   
     return (
+      <>
+      <div className="black"><Navbar isLoggedIn={true} user={user}/></div>
         <div className="app profile">
         <Sidebar user={user} role={'Admin'} />
     
@@ -158,6 +160,7 @@ export default function DoctorDetails({user}) {
       
  
       </div>
+      </>
       );
   
         }

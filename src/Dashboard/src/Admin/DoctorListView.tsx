@@ -9,10 +9,10 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import './DoctorList.css';
 import { useNavigate } from 'react-router-dom';
-
+import { useState,useEffect } from 'react';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-
-
+import axios from 'axios';
+import { url } from '../../../config';
 interface Column {
   id: 'DoctorName' | 'Status' | 'PatientsSupervising'|'PhoneNumber'|'Email';
   label: string;
@@ -54,25 +54,37 @@ function createData(
   return { id, DoctorName, Status, PatientsSupervising,PhoneNumber,Email};
 }
 
-const rows = [
-  createData(1, 'Dr.Mina', 'Available', 10,'0123456789','Mina@gmail.com'),
-  createData(2, 'Dr.Mai', 'Available', 7,'0123456789','Mai@gmail.com'),
-  createData(3, 'Dr.Youssef', 'Available', 14,'0123456789','Youssef@gmail.com'),
-  createData(4, 'Dr.Walaa', 'Available', 15,'0123456789','Walaa@gmail.com'),
-  createData(5, 'Dr.Peter', 'Available', 16,'0123456789','Peter@gmail.com'),
-  createData(6, 'Dr.Mona', 'Available', 18,'0123456789','Mona@gmail.com'),
-  createData(7, 'Dr.Shawqy', 'Not Available', 20,'0123456789','Shawqy@gmail.com'),
-  createData(8, 'Dr.Medhat', 'Available', 25,'0123456789','Medhat@gmail.com'),
-  createData(9, 'Dr.Dina', 'Available', 9,'0123456789','Dina@gmail.com'),
-  createData(10, 'Dr.Merihan', 'Not Available', 5,'0123456789','Merihan@gmail.com'),
-  createData(11, 'Dr.Samir', 'Available', 12,'0123456789','Samir@gmail.com'),
-  createData(12, 'Dr.Lina', 'Available', 7,'0123456789','Lina@gmail.com'),
-  createData(13, 'Dr.Mohamed', 'Available', 8,'0123456789','Mohamed@gmail.com'),
-  createData(14, 'Dr.Ahmed', 'Not Available', 14,'0123456789','Ahmed@gmail.com'),
-];
 
-export default function DoctorListView() {
+
+export default function DoctorListView({role}) {
   const navigate = useNavigate();
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = useState<Data[]>([]);
+
+
+
+  useEffect(() => {
+    let geturl=url+"GetAllDoctors";
+    if(role=="Admin"){
+    axios.get(geturl).then((response) => {
+      const doctors = response.data.data;
+      const newRows = doctors.map((doctor: any, index: number) =>
+        createData(
+          index + 1,
+          'Dr. '+doctor.name,
+          'Available',
+          doctor.numOfPatients,
+          doctor.phonenumber,
+          doctor.email
+        )
+      );
+      setRows(newRows);
+    });
+  }
+  }, []);
+
+
 
   const handleCellClick = (row: Data) => {
     console.log(row);
@@ -80,8 +92,6 @@ export default function DoctorListView() {
     navigate('/DoctorDetails', { state: { doctor: row as Data } });
   };
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

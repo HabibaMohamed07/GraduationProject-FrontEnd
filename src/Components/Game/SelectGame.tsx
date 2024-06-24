@@ -12,6 +12,7 @@ import StepIndicator from '@mui/joy/StepIndicator';
 import Check from '@mui/icons-material/Check';
 import Connectingheadset from './Connectingheadset.tsx';
 import Choosinggame from './choosinggame.tsx';
+import Navbar from '../../LandingPage/navbar/Navbar';
 const steps = ['Connecting To Arm', 'Connecting To HeadSet', 'Choosing Game'];
 export default function SelectGame() {
     const totalSteps = steps.length;
@@ -33,7 +34,8 @@ export default function SelectGame() {
       
     };
     return (
-
+      <>
+      <div className="black"><Navbar isLoggedIn={true}user={user}/></div>
         <div className='black' style={{height:'100%'}}>      
          <Box
             component="main"
@@ -103,6 +105,6 @@ export default function SelectGame() {
        
       </div>
         </div>
-
+        </>
     );
 }

@@ -44,6 +44,7 @@ import SubscriptionDetails from "./Dashboard/src/Patient/SubscriptionDetails.jsx
 import Tennis from "./3JS/tennis";
 import {jwtDecode}  from 'jwt-decode'
 import Connecting from './ConnectBackend/backend.jsx';
+import PrivateRoute from './PrivateRoute'; 
 import axios from 'axios';
 import { url } from "./config";
 // function App() {
@@ -100,9 +101,9 @@ import { url } from "./config";
 // }
 
 function App() {
-  useEffect(() => {
-    localStorage.removeItem('userToken');
-  });
+  // useEffect(() => {
+  //   localStorage.removeItem('userToken');
+  // });
   return (
     <Router>
       
@@ -113,81 +114,84 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const [token, setToken] = useState(null);
-  const [role,setRole]=useState('Patient');
-  const[user,setUser]=useState(null);
+  const [role, setRole] = useState('Patient');
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    
-    // Function to be invoked on navigation change
     const storedToken = localStorage.getItem('userToken');
     if (storedToken) {
-      
-      // setToken(storedToken);
-       var userToken= jwtDecode(storedToken)
-       console.log(userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
-   
-      var role=userToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-      setRole(role)
+      const userToken = jwtDecode(storedToken);
+      const role = userToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      setRole(role);
 
-      if (role=="Doctor"||role=='Admin'){ 
-      let geturl=url+"GetDoctorOrAdminProfile?uid=";
-      axios.get(geturl+userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
-      .then(
-        function(response)
-        {
-          console.log("response: ",response.data);
-          setUser(response.data.data)
-          // console.log("User:", )
+      const fetchData = async () => {
+        try {
+          if (role === "Doctor" || role === 'Admin') {
+            let geturl = `${url}GetDoctorOrAdminProfile?uid=`;
+            const response = await axios.get(geturl + userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+            setUser(response.data.data);
+            localStorage.setItem('userData', JSON.stringify(response.data.data));
+          } else if (role === "Patient") {
+            let geturl = `${url}GetPatientDetails?patientid=`;
+            const response = await axios.get(geturl + userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+            setUser(response.data.data);
+            localStorage.setItem('userData', JSON.stringify(response.data.data));
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
         }
-      
-      )
-    }
-    else if (role=="Patient")
-    {
-      let geturl=url+"GetPatientDetails?patientid=";
-      axios.get(geturl+userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'])
-      .then(
-        function(response)
-        {
-          console.log("response: ",response);
-          setUser(response.data.data)}
-      )
-    }
-      console.log("Token: ",storedToken)
-    }
+        setLoading(false);
+      };
 
-    // Add your custom logic here
+      fetchData();
+    } else {
+      setLoading(false);
+    }
   }, [location]);
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+      setUser(JSON.parse(storedUserData));
+    }
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator while fetching data
+  }
 
   return (
     <Routes>
    
-         <Route path='/game' element={<Tennis />}/>
 
           <Route path="/Signin" element={<><div className="black"> <Navbar/> </div><Signin /></>} />
           <Route path="/Signup"  element={<><div className="black"> <Navbar/> </div><Signup /></>} />
-          <Route path="/*" element={<Front/>}/>
-         <Route path='/Profile-Patient' element={<ProfilePatient/>}/>
+          <Route path="/*" element={<Front user={user} />}/>
+
+
+         <Route path='/Profile-Patient' element={<PrivateRoute><ProfilePatient/></PrivateRoute>}/>
+         <Route path='/game' element={<PrivateRoute><Tennis /></PrivateRoute>}/>
+         <Route path='/Profile-Admin' element={<PrivateRoute><ProfileAdmin/></PrivateRoute>}/>
+         <Route path='/Profile-Doctor' element={<PrivateRoute><ProfileDoctor/></PrivateRoute>}/>
+         <Route path='/selectgame' element={<PrivateRoute><SelectGame/></PrivateRoute>}/>
+         <Route path='/AssignDoctor' element={<PrivateRoute><AssignDoctor user={user}/></PrivateRoute>}/>
+         <Route path='/DoctorDetails' element={<PrivateRoute><DoctorDetails user={user}/></PrivateRoute>} />
+         <Route path='/AddComment' element={<PrivateRoute><AddingComment user={user}/></PrivateRoute>} />
+         <Route path='/PatientDetails' element={<PrivateRoute><PatientDetails user={user}/></PrivateRoute>} />
+         <Route path='/DoctorsList' element={<PrivateRoute><DoctorListPage user={user} role={role}/></PrivateRoute>}/>
+         <Route path='/PatientsList' element={<PrivateRoute><PatientListPageContent user={user} role={role}/></PrivateRoute>}/>
+         <Route path='/PatientList' element={<PrivateRoute><DoctorsPatientListView user={user}/></PrivateRoute>}/>
+         <Route path='/Profile' element={<PrivateRoute><Profile user={user} role={role}/></PrivateRoute>}/>
+         <Route path="/Dashboard" element={<PrivateRoute><Dashboard user={user} role={role}/></PrivateRoute>}/>
         
-         <Route path='/Profile-Admin' element={<ProfileAdmin/>}/>
-         <Route path='/Profile-Doctor' element={<ProfileDoctor/>}/>
-         <Route path='/selectgame' element={<> <div className="black"><Navbar isLoggedIn={true}/></div><SelectGame/></>}/>
-         <Route path='/AssignDoctor' element={<><div className="black"><Navbar isLoggedIn={true}/></div><AssignDoctor user={user}/></>}/>
-         <Route path='/DoctorDetails' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorDetails user={user}/></>} />
-         <Route path='/PatientDetails' element={<><div className="black"><Navbar isLoggedIn={true}/></div><PatientDetails user={user}/></>} />
-         <Route path='/AddComment' element={<><div className="black"><Navbar isLoggedIn={true}/></div><AddingComment user={user}/></>} />
-         <Route path='/DoctorsList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorListPage user={user}/></>}/>
-         <Route path='/PatientsList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><PatientListPageContent user={user}/></>}/>
-         <Route path='/PatientList' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorsPatientListView user={user}/></>}/>
-         <Route path='/Profile' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Profile user={user} role={role}/></>}/>
-         <Route path="/Dashboard" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Dashboard user={user} role={role}/></>}/>
-         <Route path="/Settings" element={<><div className="black"><Navbar isLoggedIn={true}/></div><Settings  user={user} role={role}/></>}/>
-         <Route path='/GameCalendar' element={<><div className="black"><Navbar isLoggedIn={true}/></div><GameCalendar user={user}/></>} />
-         <Route path='/Targets' element={<><div className="black"><Navbar isLoggedIn={true}/></div><Targets user={user}/></>} />
-         <Route path='/TreatmentProgress' element={<><div className="black"><Navbar isLoggedIn={true}/></div><TreatmentProgress user={user}/></>} />
-         <Route path='/LastGamePlayed' element={<><div className="black"><Navbar isLoggedIn={true}/></div><LastGamePlayed user={user}/></>} />
-         <Route path='/DoctorComments' element={<><div className="black"><Navbar isLoggedIn={true}/></div><DoctorComments user={user}/></>} />
-         <Route path='/SubscriptionDetails' element={<><div className="black"><Navbar isLoggedIn={true}/></div><SubscriptionDetails ueser={user}/></>} />
+         <Route path="/Settings" element={<PrivateRoute><Settings  user={user} role={role}/></PrivateRoute>}/>
+         <Route path='/GameCalendar' element={<PrivateRoute><GameCalendar user={user}/></PrivateRoute>} />
+         <Route path='/Targets' element={<PrivateRoute><Targets user={user}/></PrivateRoute>} />
+         <Route path='/TreatmentProgress' element={<PrivateRoute><TreatmentProgress user={user}/></PrivateRoute>} />
+         <Route path='/LastGamePlayed' element={<PrivateRoute> <LastGamePlayed user={user}/></PrivateRoute>} />
+         <Route path='/DoctorComments' element={<PrivateRoute> <DoctorComments user={user}/></PrivateRoute>} />
+         <Route path='/SubscriptionDetails' element={<PrivateRoute><SubscriptionDetails ueser={user}/></PrivateRoute>} />
     </Routes>
   );
 }

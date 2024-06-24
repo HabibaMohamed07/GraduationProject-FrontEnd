@@ -17,7 +17,7 @@ import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCh
 import { Alert } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
-
+import { url } from '../../../config';
 
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -45,18 +45,20 @@ export default function AddDoctor() {
       gender:'',
       patientHistory:''
     });
-    function  handleAddingDocotr()
-    {
-      console.log("Data: ", data);
-      axios.post("https://localhost:7291/AddDoctor",data)
-  .then(function(response)
-  {
-console.log(response.data)
-if (response.status === 200){
-  setOpen(true)
-}
-  })
-    }
+    const handleAddingDoctor = (data: any) => {
+      let posturl = url + "AddDoctor";
+      console.log(data);
+      axios.post(posturl, data)
+        .then(function (response) {
+          console.log(response);
+          if (response.data.isSuccess) {
+            setOpen(true);
+          } else {
+            console.log(response.data.message)
+            alert("Couldn't add Doctor: "+response.data.message);
+          }
+        });
+    };
     
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -96,16 +98,16 @@ if (response.status === 200){
                   const data = {
                     email: formElements.email.value,
                     password:formElements.email.value.split("@")[0]+'@'+24,
-                    name: formElements.name.value,
+                    name:formElements.name.value.trim().replace(/\s+/g, ''),
                     age: 0,
                     phoneNumber: formElements.number.value,
                     gender:"male",
                     patientHistory:"String"
                   };
                   alert(JSON.stringify(data, null, 2));
-                  setData(data)
+           
                   
-                  handleAddingDocotr()
+                  handleAddingDoctor(data)
                 }}
               >
         <FormControl sx={{ gridColumn: '1/-1',width:'200%' }} required>

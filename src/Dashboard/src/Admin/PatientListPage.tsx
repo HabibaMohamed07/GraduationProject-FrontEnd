@@ -11,7 +11,7 @@ import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCh
 import Button from '@mui/joy/Button';
 import PatientListView from './PatientListView.tsx';
 import AddPatient from './AddingPatient.tsx';
-
+import Navbar from '../../../LandingPage/navbar/Navbar';
 
 
 interface TabPanelProps {
@@ -50,7 +50,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function PatientListPageContent({user}) {
+export default function PatientListPageContent({user,role}) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -64,6 +64,8 @@ export default function PatientListPageContent({user}) {
   };
 
   return (
+    <>
+    <div className="black"><Navbar isLoggedIn={true} user={user}/></div>
     <div className="app profile">
     <Sidebar user={user} role={'Admin'} />
     <Box sx={{ width: '100%' ,height:'auto' ,backgroundColor:'rgb(4,12,24)'}}>
@@ -75,7 +77,7 @@ export default function PatientListPageContent({user}) {
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
-        >
+          >
           <Tab label="Patients List" {...a11yProps(0)} />
           <Tab label="Add Patient" {...a11yProps(1)} />
         
@@ -88,7 +90,7 @@ export default function PatientListPageContent({user}) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-        <PatientListView/>
+        <PatientListView role={role}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
        
@@ -98,5 +100,6 @@ export default function PatientListPageContent({user}) {
       </SwipeableViews>
     </Box>
     </div>
+    </>
   );
 }

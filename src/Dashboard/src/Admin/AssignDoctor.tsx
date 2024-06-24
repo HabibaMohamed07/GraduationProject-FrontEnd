@@ -5,7 +5,7 @@ import Stack from '@mui/joy/Stack';
 import Sidebar from '../layout/Sidebar/Sidebar';
 import Typography from '@mui/joy/Typography';
 import Button  from '@mui/joy/Button';
-
+import Navbar from '../../../LandingPage/navbar/Navbar';
 import { useLocation } from 'react-router-dom';
 import Snackbar from '@mui/joy/Snackbar';
 import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
@@ -22,6 +22,9 @@ export default function AssignDoctor({user}) {
   const recieved = location.state;
   console.log(recieved.receivedObject.doctor.DoctorName)
   return (
+    <>
+    <div className="black"><Navbar isLoggedIn={true} user={user}/></div>
+
     <div className="app profile">
     <Sidebar user={user} role={'Admin'} />
 
@@ -86,15 +89,16 @@ export default function AssignDoctor({user}) {
             size="sm"
             variant="soft"
             color="success"
-          >
+            >
             Dismiss
           </Button>
         }
-      >
+        >
       Assigned The Patient
       </Snackbar>
     </div>
     
+        </>
     
    
      

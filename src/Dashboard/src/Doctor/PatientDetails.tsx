@@ -31,6 +31,7 @@ import Typography from '@mui/joy/Typography';
 import Box from '@mui/joy/Box';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ViewHistory from "./ViewHistory.tsx";
+import Navbar from "../../../LandingPage/navbar/Navbar";
 
 
 interface Data {
@@ -96,6 +97,7 @@ export default function PatientDetails({user})
     };
   
     return (
+      <><div className="black"><Navbar isLoggedIn={true} user={user}/></div>
         <div className="app profile">
         <Sidebar user={user} role={'Doctor'} />
     
@@ -263,6 +265,7 @@ export default function PatientDetails({user})
     </Stack>
 
         </div>
+        </>
       );
   
 }

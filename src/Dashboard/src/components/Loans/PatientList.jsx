@@ -20,13 +20,12 @@ const PatientList = ({ user,role }) => {
   {
     geturl="GetAllPatients";
     geturl=url+geturl;
-    console.log(geturl);
-    console.log("This is Admin he's Role: "+role);
+   
   }
 
     axios.get(geturl)
       .then(function (response) {
-    
+        
         const patientNames = response.data.data.map(patient => patient['name']);
         console.log(patientNames);
         setPatients(patientNames);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css';
 import logo from '../../logo.svg';
 import Dropdown from '@mui/joy/Dropdown';
@@ -17,15 +17,24 @@ import Avatar from '@mui/joy/Avatar';
 import { personsImgs } from '../../Dashboard/src/utils/images';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssVarsProvider } from '@mui/joy';
-const Navbar = ({ isLoggedIn }) => {
-  const theme= createTheme({
-    palette:{
-      mode:'dark',
-    }
+
+const Navbar = ({ isLoggedIn, user }) => {
+  const navigate = useNavigate();
+console.log("Logging IN: ", isLoggedIn);
+  const theme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
   });
+
+  const handleLogout = () => {
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userData');
+    navigate('/');
+  };
+
   if (!isLoggedIn) {
     return (
-      
       <div className="gpt3__navbar">
         <div className="gpt3__navbar-links">
           <div className="gpt3__navbar-links_container">
@@ -67,118 +76,112 @@ const Navbar = ({ isLoggedIn }) => {
   } else {
     return (
       <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
-      <div className="gpt3__navbar">
-        <div className="gpt3__navbar-links">
-          <div className="gpt3__navbar-links_container">
-            <Link to="/">
+        <div className="gpt3__navbar">
+          <div className="gpt3__navbar-links">
+            <div className="gpt3__navbar-links_container">
+              <Link to="/">
+                <p>
+                  <a href="#home">MindMend</a>
+                </p>
+              </Link>
+            </div>
+            <div className="gpt3__navbar-links_container">
+              <Link to="/">
+                <p>
+                  <a>Home</a>
+                </p>
+              </Link>
+              <Link to="/Dashboard">
+                <p>
+                  <a>Dashboard</a>
+                </p>
+              </Link>
               <p>
-                <a href="#home">MindMend</a>
+                <a href="#sec2">What is MindMend?</a>
               </p>
-            </Link>
+              <p>
+                <a href="#blog">Our Therapy</a>
+              </p>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }} className='dropdown-wrapper'>
+              <Dropdown>
+                <MenuButton
+                  variant="plain"
+                  size="sm"
+                  sx={{ maxWidth: '32px', maxHeight: '32px', borderRadius: '9999999px', backgroundColor: 'transparent' }}
+                >
+                  <Avatar
+                    src={personsImgs.person_two}
+                    sx={{ maxWidth: '32px', maxHeight: '32px' }}
+                  />
+                </MenuButton>
+                <Menu
+                  placement="bottom-end"
+                  size="sm"
+                  sx={{
+                    zIndex: '99999',
+                    p: 1,
+                    gap: 1,
+                    '--ListItem-radius': 'var(--joy-radius-sm)',
+                  }}
+                >
+                  <MenuItem>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                      }}
+                    >
+                      <Avatar
+                        src={personsImgs.person_two}
+                        sx={{ borderRadius: '50%' }}
+                      />
+                      <Box sx={{ ml: 1.5 }}>
+                        <Typography level="title-sm" textColor="text.primary">
+                          {user.name}
+                        </Typography>
+                        <Typography level="body-xs" textColor="text.tertiary">
+                          {user.email}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </MenuItem>
+                  <ListDivider />
+                  <MenuItem>
+                    <HelpRoundedIcon />
+                    Help
+                  </MenuItem>
+                  <MenuItem>
+                    <SettingsRoundedIcon />
+                    Settings
+                  </MenuItem>
+                  <ListDivider />
+                  <MenuItem component="a" href="/blog/first-look-at-joy/">
+                    Contact Us
+                    <OpenInNewRoundedIcon />
+                  </MenuItem>
+                  <MenuItem
+                    component="a"
+                    href="https://github.com/mui/material-ui/tree/master/docs/data/joy/getting-started/templates/email"
+                  >
+                    Instructions
+                    <OpenInNewRoundedIcon />
+                  </MenuItem>
+                  <ListDivider />
+                  <MenuItem onClick={handleLogout}>
+                    <LogoutRoundedIcon />
+                    Log out
+                  </MenuItem>
+                </Menu>
+              </Dropdown>
+            </div>
           </div>
-          <div className="gpt3__navbar-links_container">
-            <Link to="/">
-              <p>
-                <a>Home</a>
-              </p>
-            </Link>
-            <Link to="/Dashboard">
-              <p>
-                <a>Dashboard</a>
-              </p>
-            </Link>
-            <p>
-              <a href="#sec2">What is MindMend?</a>
-            </p>
-            <p>
-              <a href="#blog">Our Therapy</a>
-            </p>
+          <div className="gpt3__navbar-menu">
+            {/* Add menu items here */}
           </div>
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }} className='dropdown-wrapper'>
-        
-          <Dropdown>
-          <MenuButton
-            variant="plain"
-            size="sm"
-            sx={{ maxWidth: '32px', maxHeight: '32px', borderRadius: '9999999px' ,backgroundColor:'transparent'}}
-          >
-            <Avatar
-              src={personsImgs.person_two}
-             
-              sx={{ maxWidth: '32px', maxHeight: '32px' ,}}
-            />
-          </MenuButton>
-          <Menu
-            placement="bottom-end"
-            size="sm"
-            sx={{
-              zIndex: '99999',
-              p: 1,
-              gap: 1,
-              '--ListItem-radius': 'var(--joy-radius-sm)',
-              
-            }}
-          >
-            <MenuItem>
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                <Avatar
-                src={personsImgs.person_two}
-                  sx={{ borderRadius: '50%' }}
-                />
-                <Box sx={{ ml: 1.5 }}>
-                  <Typography level="title-sm" textColor="text.primary">
-                    Habiba Mohamed
-                  </Typography>
-                  <Typography level="body-xs" textColor="text.tertiary">
-                   Habiba@gmail.com
-                  </Typography>
-                </Box>
-              </Box>
-            </MenuItem>
-            <ListDivider />
-            <MenuItem>
-              <HelpRoundedIcon />
-              Help
-            </MenuItem>
-            <MenuItem>
-              <SettingsRoundedIcon />
-              Settings
-            </MenuItem>
-            <ListDivider />
-            <MenuItem component="a" href="/blog/first-look-at-joy/">
-              Contact Us
-              <OpenInNewRoundedIcon />
-            </MenuItem>
-            <MenuItem
-              component="a"
-              href="https://github.com/mui/material-ui/tree/master/docs/data/joy/getting-started/templates/email"
-            >
-              Instructions
-              <OpenInNewRoundedIcon />
-            </MenuItem>
-            <ListDivider />
-            <MenuItem>
-              <LogoutRoundedIcon />
-              Log out
-            </MenuItem>
-          </Menu>
-        </Dropdown>
-        
-          
         </div>
-        </div>
-        <div className="gpt3__navbar-menu">
-          {/* Add menu items here */}
-        </div>
-      </div>
       </CssVarsProvider>
     );
-    
   }
 };
 

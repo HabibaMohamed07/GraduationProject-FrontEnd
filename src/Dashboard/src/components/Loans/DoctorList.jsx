@@ -14,16 +14,16 @@ const DoctorList = ({user,role}) => {
     axios.get(geturl)
     .then(function (response) {
   
-      const Doctors = response.data.data.map(Doctors => doctors['name']);
-      console.log(Doctors);
+      const Doctors = response.data.data.map(doctor => doctor['name']);
+      console.log("Doctors Available: ", response);
       setDoctors(Doctors);
     })
     .catch(function (error) {
       console.error("Error fetching Doctors:", error);
     });
  
-  }
-  )[user]
+  },[user]);
+  
   return (
     <div className="subgrid-two-item grid-common grid-c7 scroll" style={{height:'150rem'}}>
         <div className="grid-c-title">
@@ -34,7 +34,7 @@ const DoctorList = ({user,role}) => {
         </div>
         <div className="grid-c7-content" style={{position:'relative' , display:'grid' , paddingTop:'40px', gap: '25px'}}>
         {doctors.map((doctor, index) => (
-          <ul key={index}>{doctor}</ul>
+          <ul key={index}>Dr. {doctor}</ul>
         ))}    </div>
     </div>
   )

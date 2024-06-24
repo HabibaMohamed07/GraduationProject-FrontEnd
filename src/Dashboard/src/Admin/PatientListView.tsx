@@ -11,8 +11,9 @@ import './DoctorList.css';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-
+import { useState,useEffect } from 'react';
+import axios from 'axios';
+import { url } from '../../../config';
 interface Column {
   id: 'PatientName' | 'PhoneNumber' | 'DoctorAssignedTo'|'Email';
   label: string;
@@ -52,22 +53,36 @@ function createData(
   return { id, PatientName,PhoneNumber, DoctorAssignedTo,Email};
 }
 
-const rows = [
-  createData(1, 'Habiba Mohamed',  '0123456789','Dr.Mina','Mina@gmail.com'),
-  createData(2, 'Youssef Ali',  '0123456789','Dr.Walaa','Youssef@gmail.com'),
-  createData(3, 'Mohamed Wael',  '0123456789','Dr.Youssef','Mohamed@gmail.com'),
-  createData(4, 'Mai Mourad',  '0123456789','Dr.Ali','Mai@gmail.com'),
-  createData(5, 'Wael Gaser',  '0123456789','Dr.Mai','Wael@gmail.com'),
-  createData(6, 'Safwat Ali',  '0123456789','Dr.Habiba','Safwat@gmail.com'),
-  createData(7, 'Reem Nabil',  '0123456789','Dr.Abdelrahman','Reem@gmail.com'),
-  createData(8, 'Tamer Alaa',  '0123456789','Dr.Ahmed','Tamer@gmail.com'),
-  createData(9, 'Hazem Waleed',  '0123456789','Dr.Mina','Hazem@gmail.com'),
-];
 
-export default function PatientListView() {
+
+export default function PatientListView({role}) {
+  
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [rows, setRows] = useState<Data[]>([]);
     
-    
- 
+  
+    useEffect(() => {
+      let geturl=url+"GetAllPatients";
+      if(role=="Admin"){
+      axios.get(geturl).then((response) => {
+        const patient = response.data.data;
+        const newRows = patient.map((patient: any, index: number) =>
+          createData(
+            index + 1,
+            patient.name,
+      
+          
+            patient.phone,
+            patient.assignedDrName,
+            patient.email
+          )
+        );
+        setRows(newRows);
+      });
+    }
+    }, []);
+  
  
   const navigate = useNavigate();
 
@@ -76,9 +91,6 @@ export default function PatientListView() {
     // Navigate to DoctorDetails page and pass rowData as state
     navigate('/DoctorDetails', { state: { doctor: row as Data } });
   };
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

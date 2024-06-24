@@ -44,7 +44,7 @@ import './Signup.css';
 import Navbar from "../LandingPage/navbar/Navbar.js";
 import { Maximize } from "@mui/icons-material";
 import axios from "axios";
-
+import { url } from "../config.js";
 interface FormElements extends HTMLFormControlsCollection {
   //step 1
   email: HTMLInputElement;
@@ -102,7 +102,8 @@ export default function JoySignInSideTemplate() {
 {
   
   if(activeStep==1&&questionIndex==2){
-  axios.post("https://localhost:7291/RegisterAsync",data)
+    let posturl=url+"RegisterAsync";
+  axios.post(posturl,data)
   .then(function(response)
   {
 console.log(response.data)
@@ -295,16 +296,17 @@ console.log(response.data)
                 onSubmit={(event: React.FormEvent<SignInFormElement>) => {
                   event.preventDefault();
                   const formElements = event.currentTarget.elements;
+               
                   setData((prevData) => ({
                     ...prevData,
                     email: formElements.email.value,
-                    name:formElements.name.value,
+                    name: formElements.name.value.trim().replace(/\s+/g, ''),
                     password: formElements.password.value,
                     age: formElements.Age.value,
                     phoneNumber: formElements.PhoneNumber.value,
                     gender: formElements.Gender.value
                   }));
-                  // alert(JSON.stringify(data, null, 2));
+                  alert(JSON.stringify(data, null, 2));
                   handleNext();
                 }}
               >

@@ -49,7 +49,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function DoctorListPageContent() {
+export default function DoctorListPageContent({user,role}) {
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -86,7 +86,7 @@ export default function DoctorListPageContent() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-        <DoctorListView/>
+        <DoctorListView role={role}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
         <AddDoctor/>

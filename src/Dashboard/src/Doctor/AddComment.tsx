@@ -17,7 +17,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ChatProps } from './typing';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
-
+import Navbar from '../../../LandingPage/navbar/Navbar';
 type MessagesPaneProps = {
     chat: ChatProps;
   };
@@ -32,6 +32,7 @@ export default function AddingComment({user})
     const patientinfo=received.receivedObject;
     return(
         <>
+        <div className="black"><Navbar isLoggedIn={true} user={user}/></div>
         <div className="app profile">
         <Sidebar user={user} role={'Doctor'} />
          
