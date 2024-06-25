@@ -6,7 +6,8 @@ import React, {useEffect, useRef,useState,useMemo } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import axios from 'axios';
 import * as THREE from 'three';
-export function TennisModel({props,data}) {
+import Navbar from '../LandingPage/navbar/Navbar';
+export function TennisModel({props,data,user}) {
   const group = useRef()
   const [command, setCommand] = useState('');
   const [hasplayed, setHasplayed] = useState(false);
@@ -153,8 +154,9 @@ export function TennisModel({props,data}) {
   
 
   return (
-   
+    
          <group ref={group} {...props} dispose={null} scale={[5,5,1]} position={[0,-1,0]}>
+       
       <group name="Scene">
         <mesh name="Ground" geometry={nodes.Ground.geometry} material={materials['Material.001']} position={[0.015, -0.086, 0.071]} rotation={[-Math.PI, 0, -Math.PI]} scale={[-1, -2.835, -1.618]} />
         <mesh name="Net" geometry={nodes.Net.geometry} material={nodes.Net.material} position={[0.003, 0.189, 0.042]} rotation={[1.541, -0.005, -3.138]} scale={[0.898, 1.316, 0.188]} />
@@ -181,7 +183,7 @@ export function TennisModel({props,data}) {
       </group>
     </group>
     
-
+ 
    )
 }
 

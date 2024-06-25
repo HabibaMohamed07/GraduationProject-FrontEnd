@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Canvas } from "@react-three/fiber";
-import { CourtDefault } from './TennisCourt.jsx';
-import Tennismodel from './OpponentLeftServe.jsx';
 import { TennisModel } from './Tennisgame.jsx';
+import Navbar from "../LandingPage/navbar/Navbar.js";
 
 export default function Tennis({ Patient }) {
     const [result, setResult] = useState(null);
@@ -35,9 +34,17 @@ export default function Tennis({ Patient }) {
     }, []);
 
     return (
-        <Canvas  style={{position:'relative',backgroundColor:'white',height:'100vh' ,zIndex:'1'}}>
-            <directionalLight intensity={5} />
-           <TennisModel data={result}/>
-        </Canvas>
-         );
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+            
+                {/* <Navbar isLoggedIn={true} user={Patient} /> */}
+                {/* <p>hello world</p> */}
+            {/* </div> */}
+            <div style={{ flexGrow: 1, position: 'relative', backgroundColor: 'white', zIndex: 1 }}>
+                <Canvas style={{ height: '100%' }}>
+                    <directionalLight intensity={5} />
+                    {showAnimation && <TennisModel data={result} />}
+                </Canvas>
+            </div>
+        </div>
+    );
 }
