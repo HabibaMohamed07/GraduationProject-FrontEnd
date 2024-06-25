@@ -1,56 +1,85 @@
 import "./Budget.css";
 import { iconsImgs } from "../../utils/images";
 import { budget } from "../../data/dataPatient";
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-var comments = [
-  "There is a significant progress in the right hand functionality",
-  "Excellent progress in the patient's recovery",
-  "Patient's condition is stable",
-  "Improvement observed in mobility",
-  "Recovery is slower than expected",
-  "Recovery is slower than expected",
-  "Recovery is slower than expected",
-  "Recovery is slower than expected",
-  "Recovery is slower than expected",
-  "Recovery is slower than expected",
-  "Recovery is slower than expected",
-  "Recovery is slower than expected",
-  
-];
+import { url } from "../../../../config";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-const Budget = ({user}) => {
-  console.log('user',user['id'])
-  axios.get("https://localhost:7291/GetAllCommentsByDoctorId?id="+user['id']).then
-  (res=>
-    {
-      if(res.data['data']!=null)
-    
-      {
+const Budget = ({ user, isPatient, patientId }) => {
+  const [comments, setComments] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  console.log('user', user['id']);
 
-        comments=res.data['data']
+  useEffect(() => {
+    let geturl = "";
+    if (isPatient) {
+      geturl = `${url}GetAllCommentsByPatientId?id=${patientId}`;
+    } else {
+      geturl = `${url}GetAllCommentsByDoctorId?id=${user['id']}`;
+    }
+
+    axios.get(geturl).then(res => {
+      console.log(res);
+      if (res.data['data'] != null) {
+        const comments = res.data.data.map(comment => ({
+          message: comment.message,
+          id: comment.id,
+          sender: comment.sender,
+      
+        }));
+        setComments(comments);
+      } else {
+        setComments([{ message: 'No comments were added by the doctor', id: null }]);
       }
-      else{
-        // comments=["No Comments were added by this Doctor"]
+      console.log("Comments by doctor: ", comments);
+    });
+  }, [user,refresh]);
+
+  function deleteComment(commentId) {
+    // Implement the delete functionality here
+    let deleteurl=url+"DeleteComment?id="+commentId;
+
+    
+    axios.delete(deleteurl).then(response=>{
+      console.log(response)
+      if(response.data.isSuccess)
+      {
+        alert("Deleted Comment Successfully");
+        setRefresh(prev => !prev);
+      }
+      else
+      {
+        alert("Failed to delete comment");
       }
     })
+
+  }
+
   return (
     <div className="grid-two-item grid-common grid-c4">
       <div className="grid-c-title">
         <h3 className="grid-c-title-text">Doctor Comments</h3>
-        <button className="grid-c-title-icon">
-          <img src={iconsImgs.plus} alt="Plus Icon" />
-        </button>
+    
       </div>
       <div className="grid-c4-content bg-jet scroll">
         <div className="grid-items">
-          {budget.map((budgetItem, index) => (
-            <div className="grid-item" key={budgetItem.id}>
+          {comments.map((commentItem, index) => (
+            <div className="grid-item" key={index}>
               <div className="grid-item-l">
                 <div className="icon">
                   <img src={iconsImgs.check} alt="Check Icon" />
                 </div>
-                <p className="text text-silver-v1">{comments[index]}</p>
+                <p className="text text-silver-v1">{commentItem.message}</p>
+               
+             
+    
+                {commentItem.id != null && (
+        <IconButton aria-label="delete" size="small" sx={{ color: 'red' }} onClick={() => deleteComment(commentItem.id)}>
+          <DeleteIcon fontSize="small" />
+        </IconButton>
+      )}
               </div>
             </div>
           ))}

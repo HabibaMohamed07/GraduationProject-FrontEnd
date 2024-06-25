@@ -18,6 +18,8 @@ import { ChatProps } from './typing';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
 import Navbar from '../../../LandingPage/navbar/Navbar';
+import axios from 'axios';
+import { url } from '../../../config';
 type MessagesPaneProps = {
     chat: ChatProps;
   };
@@ -66,9 +68,27 @@ export default function AddingComment({user})
         <MessageInput
         textAreaValue={textAreaValue}
         setTextAreaValue={setTextAreaValue}
-        onSubmit={() => {
-        console.log("Adding Comment..")
-        setOpen(true)
+        onSubmit={() => { 
+        console.log("Adding Comment..",textAreaValue)
+        let posturl=url+"AddComment";
+        let data={
+       
+          patientId:received.receivedObject.patient.patientid,
+          doctorId:user['id'],
+          message:textAreaValue,
+          sender:user['name'],
+
+        };
+      
+        console.log(data);
+        axios.post(posturl,data).then(function (response) {
+          console.log(response);
+          if (response.data.isSuccess) {
+            setOpen(true);
+          } else {
+            alert("Couldn't add user: "+response.data.message);
+          }
+        });
         } 
         }
         />       

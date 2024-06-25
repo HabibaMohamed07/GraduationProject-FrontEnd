@@ -114,7 +114,8 @@ function App() {
 
 function AppContent() {
   const location = useLocation();
-  const [role, setRole] = useState('Patient');
+  const [role, setRole] = useState('');
+  const [checkrole, setCheckRole] = useState('');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -122,22 +123,26 @@ function AppContent() {
     const storedToken = localStorage.getItem('userToken');
     if (storedToken) {
       const userToken = jwtDecode(storedToken);
-      const role = userToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-      setRole(role);
-
+      
+      const checkrole = userToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      setCheckRole(checkrole);
       const fetchData = async () => {
         try {
-          if (role === "Doctor" || role === 'Admin') {
+          if (checkrole === "Doctor" || checkrole === 'Admin') {
             let geturl = `${url}GetDoctorOrAdminProfile?uid=`;
             const response = await axios.get(geturl + userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
             setUser(response.data.data);
+           
             localStorage.setItem('userData', JSON.stringify(response.data.data));
-          } else if (role === "Patient") {
+          } else if (checkrole === "Patient") {
             let geturl = `${url}GetPatientDetails?patientid=`;
             const response = await axios.get(geturl + userToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']);
+          
             setUser(response.data.data);
             localStorage.setItem('userData', JSON.stringify(response.data.data));
           }
+          const role = userToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+          setRole(role);
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -169,32 +174,43 @@ function AppContent() {
           <Route path="/Signup"  element={<><div className="black"> <Navbar/> </div><Signup /></>} />
           <Route path="/*" element={<Front user={user} />}/>
 
-
-         <Route path='/Profile-Patient' element={<PrivateRoute><ProfilePatient/></PrivateRoute>}/>
-         <Route path='/game' element={<PrivateRoute><Tennis /></PrivateRoute>}/>
-         <Route path='/Profile-Admin' element={<PrivateRoute><ProfileAdmin/></PrivateRoute>}/>
-         <Route path='/Profile-Doctor' element={<PrivateRoute><ProfileDoctor/></PrivateRoute>}/>
-         <Route path='/selectgame' element={<PrivateRoute><SelectGame/></PrivateRoute>}/>
+          {checkrole=="Admin" &&( <>
          <Route path='/AssignDoctor' element={<PrivateRoute><AssignDoctor user={user}/></PrivateRoute>}/>
          <Route path='/DoctorDetails' element={<PrivateRoute><DoctorDetails user={user}/></PrivateRoute>} />
-         <Route path='/AddComment' element={<PrivateRoute><AddingComment user={user}/></PrivateRoute>} />
-         <Route path='/PatientDetails' element={<PrivateRoute><PatientDetails user={user}/></PrivateRoute>} />
          <Route path='/DoctorsList' element={<PrivateRoute><DoctorListPage user={user} role={role}/></PrivateRoute>}/>
          <Route path='/PatientsList' element={<PrivateRoute><PatientListPageContent user={user} role={role}/></PrivateRoute>}/>
-         <Route path='/PatientList' element={<PrivateRoute><DoctorsPatientListView user={user}/></PrivateRoute>}/>
          <Route path='/Profile' element={<PrivateRoute><Profile user={user} role={role}/></PrivateRoute>}/>
          <Route path="/Dashboard" element={<PrivateRoute><Dashboard user={user} role={role}/></PrivateRoute>}/>
-        
          <Route path="/Settings" element={<PrivateRoute><Settings  user={user} role={role}/></PrivateRoute>}/>
+         </>) }
+         {checkrole=="Doctor"&&(<>       
+           <Route path='/PatientList' element={<PrivateRoute><DoctorsPatientListView user={user} role={role}/></PrivateRoute>}/>
+         <Route path='/PatientDetails' element={<PrivateRoute><PatientDetails user={user}/></PrivateRoute>} />
+         <Route path='/AddComment' element={<PrivateRoute><AddingComment user={user}/></PrivateRoute>} />
+         <Route path="/Dashboard" element={<PrivateRoute><Dashboard user={user} role={role}/></PrivateRoute>}/>
+         <Route path='/Profile' element={<PrivateRoute><Profile user={user} role={role}/></PrivateRoute>}/>
+         <Route path="/Settings" element={<PrivateRoute><Settings  user={user} role={role}/></PrivateRoute>}/>
+         </>)}  
+         {checkrole=="Patient" &&(<>
+         <Route path="/Settings" element={<PrivateRoute><Settings  user={user} role={role}/></PrivateRoute>}/>
+         <Route path='/game' element={<PrivateRoute><Tennis /></PrivateRoute>}/>
+         <Route path='/selectgame' element={<PrivateRoute><SelectGame/></PrivateRoute>}/>
          <Route path='/GameCalendar' element={<PrivateRoute><GameCalendar user={user}/></PrivateRoute>} />
+         <Route path='/Profile' element={<PrivateRoute><Profile user={user} role={role}/></PrivateRoute>}/>
          <Route path='/Targets' element={<PrivateRoute><Targets user={user}/></PrivateRoute>} />
+         <Route path="/Dashboard" element={<PrivateRoute><Dashboard user={user} role={role}/></PrivateRoute>}/>
          <Route path='/TreatmentProgress' element={<PrivateRoute><TreatmentProgress user={user}/></PrivateRoute>} />
          <Route path='/LastGamePlayed' element={<PrivateRoute> <LastGamePlayed user={user}/></PrivateRoute>} />
          <Route path='/DoctorComments' element={<PrivateRoute> <DoctorComments user={user}/></PrivateRoute>} />
          <Route path='/SubscriptionDetails' element={<PrivateRoute><SubscriptionDetails ueser={user}/></PrivateRoute>} />
+
+         </>)}
     </Routes>
   );
 }
+{/* <Route path='/Profile-Patient' element={<PrivateRoute><ProfilePatient/></PrivateRoute>}/>
+<Route path='/Profile-Doctor' element={<PrivateRoute><ProfileDoctor/></PrivateRoute>}/>
+<Route path='/Profile-Admin' element={<PrivateRoute><ProfileAdmin/></PrivateRoute>}/> */}
 
 export default App;
     

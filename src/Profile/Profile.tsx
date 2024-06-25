@@ -22,7 +22,7 @@ export default function MyProfile({ user, role }) {
       <div className="black"><Navbar isLoggedIn={true}user={user}/></div>
       <div className="app profile">
         <Sidebar user={user} role={role} />
-        <ProfileDoctor />;
+        <ProfileDoctor user={user} role={role} />;
       </div>
       </>
     );

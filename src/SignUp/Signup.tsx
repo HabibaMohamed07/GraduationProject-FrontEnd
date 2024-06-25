@@ -9,7 +9,7 @@ import Divider from "@mui/joy/Divider";
 import FormControl from "@mui/joy/FormControl";
 import FormLabel, { formLabelClasses } from "@mui/joy/FormLabel";
 import IconButton, { IconButtonProps } from "@mui/joy/IconButton";
-import { Link,useNavigate   } from 'react-router-dom';
+import { Link,Navigate,useNavigate   } from 'react-router-dom';
 import Input from "@mui/joy/Input";
 import Typography from "@mui/joy/Typography";
 import Stack from "@mui/joy/Stack";
@@ -88,6 +88,7 @@ interface SignInFormElement extends HTMLFormElement {
 
 const steps = ["Personal Information", "Patient's History", "Subscription"];
 export default function JoySignInSideTemplate() {
+  const navigate=useNavigate();
     const [value, setValue] = React.useState('female');
     const [data, setData] = React.useState({
       email:'',
@@ -98,17 +99,20 @@ export default function JoySignInSideTemplate() {
       gender:'',
       patientHistory:''
     });
-    function handlesubmit()
+    function  handlesubmit()
 {
   
-  if(activeStep==1&&questionIndex==2){
+ 
     let posturl=url+"RegisterAsync";
-  axios.post(posturl,data)
-  .then(function(response)
-  {
-console.log(response.data)
+    console.log("data to be created: ", data);
+    axios.post(posturl,data)
+    .then(function(response)
+    {
+      console.log(response)
+      console.log("data to be created: ", data);
+      navigate('/Signin');
   })
-}
+
 }
     const [options, setOptions] = React.useState({
         IsPatientWork:false,
@@ -371,33 +375,33 @@ console.log(response.data)
 
     if (questionIndex === 0) {
       const medicaldata1 = {
-        IsPatientWork: formElements.IsPatientWork.checked?formElements.Job.value:'',
-        Heart: formElements.Heart.value,
-        Kidney: formElements.Kidney.value,
-        Lung: formElements.Lung.value,
-        AutoImmune: formElements.AutoImmune.value,
+        IsPatientWork: formElements.IsPatientWork.checked?formElements.Job.value:'No',
+        Heart: formElements.Heart.value||"yes",
+        Kidney: formElements.Kidney.value||"yes",       
+        Lung: formElements.Lung.value||"yes",
+        AutoImmune: formElements.AutoImmune.value||"yes",
       };
      
 
       data.patientHistory += Object.values(medicaldata1).join('@');
     } else if (questionIndex === 1) {
       const medicaldata2 = {
-        IsPatientSurgery: formElements.IsPatientSurgery.checked?formElements.Surgery.value:'',
-        Accident: formElements.Accident.value,
-        Medications: formElements.Medications.value,
-        MedicationsDetails: formElements.MedicationsDetails.value,
-        Smoke: formElements.Smoke.value,
-        Alcohol: formElements.Alcohol.value,
+        IsPatientSurgery: formElements.IsPatientSurgery.checked?formElements.Surgery.value:'No',
+        Accident: formElements.Accident.value||"yes",
+        // Medications: formElements.Medications.value||"yes",
+        MedicationsDetails: formElements.MedicationsDetails.value||"no medications",
+        Smoke: formElements.Smoke.value||"yes",
+        Alcohol: formElements.Alcohol.value||"yes",
       };
      
       data.patientHistory += '@' + Object.values(medicaldata2).join('@');
     } else if (questionIndex === 2) {
       const medicaldata3 = {
-        WalkWithoutAssitance: formElements.WalkwithoutAssistance.value,
-        UnderstandingLang: formElements.UnderstandingLang.value,
-        Graspobject: formElements.Graspobject.value,
-        TurnHead: formElements.TurnHead.value,
-        patientstrugglewith: formElements.patientstruggle[0].innerHTML,
+        WalkWithoutAssitance: formElements.WalkwithoutAssistance.value||"yes",
+        UnderstandingLang: formElements.UnderstandingLang.value||"yes",
+        Graspobject: formElements.Graspobject.value||"yes",
+        TurnHead: formElements.TurnHead.value||"yes",
+        patientstrugglewith: formElements.patientstruggle.length > 0 ?  formElements.patientstruggle[0].innerHTML :"Left",
       };
       data.patientHistory += '@' + Object.values(medicaldata3).join('@');
     }
@@ -688,7 +692,7 @@ console.log(response.data)
                    Back
                   </Button>
                 
-                        <Button type="submit" onClick={handlesubmit} fullWidth>
+                        <Button type="submit"  fullWidth>
                    Next
                   </Button>
                     
@@ -806,7 +810,7 @@ sx={{
                    <CardActions sx={{ gridColumn: '1/-1'
                   ,display:"grid" }}>
                     
-                     <Button variant="solid" color="primary" component={Link} to="/Dashboard">
+                     <Button variant="solid" color="primary" onClick={handlesubmit}>
                        Add card
                      </Button>
                     

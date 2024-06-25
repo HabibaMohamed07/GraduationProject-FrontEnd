@@ -15,7 +15,7 @@ const Sidebar = ({user,role}) => {
   const { isSidebarOpen } = useContext(SidebarContext);
 
   const location = useLocation();
-
+  console.log(("SidebarRole: ",role));
   useEffect(() => {
     handleLink()
     if (isSidebarOpen) {
@@ -32,7 +32,7 @@ const Sidebar = ({user,role}) => {
     setActiveLinkInd(location.pathname.replace("/", ""));
     }
  
-if (role=='Patient'){
+if (role=='Patient'&&user){
   return (
     <div className={`sidebar ${sidebarClass}`}>
       <div className="info-img img-fit-cover">

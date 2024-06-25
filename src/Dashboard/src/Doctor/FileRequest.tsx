@@ -23,7 +23,7 @@ export default function FileRequest() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}  startIcon={<DescriptionIcon  sx={{ color: purple[50] }}/>} >
+      <Button variant="outlined"  sx={{width:"24%",height:"auto",maxwidth:"23%"}} onClick={handleClickOpen}  startIcon={<DescriptionIcon  sx={{ color: purple[50] }}/>} >
         File Request 
       </Button>
       <Dialog

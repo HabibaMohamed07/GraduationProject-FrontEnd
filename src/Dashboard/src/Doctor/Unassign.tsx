@@ -30,7 +30,7 @@ export default function Unassign() {
   }
   return (
     <React.Fragment>
-      <Button variant="outlined"  color="error" startIcon={<BlockIcon  sx={{ color: purple[50] }}/>}  onClick={handleClickOpen}>
+      <Button variant="outlined" sx={{width:"23%",height:"auto",maxwidth:"23%"}}  color="error" startIcon={<BlockIcon  sx={{ color: purple[50] }}/>}  onClick={handleClickOpen}>
        Unassign
       </Button>
 

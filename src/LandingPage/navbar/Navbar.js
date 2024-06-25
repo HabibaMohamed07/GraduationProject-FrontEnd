@@ -30,7 +30,9 @@ console.log("Logging IN: ", isLoggedIn);
   const handleLogout = () => {
     localStorage.removeItem('userToken');
     localStorage.removeItem('userData');
+    window.location.reload();
     navigate('/');
+
   };
 
   if (!isLoggedIn) {
@@ -73,7 +75,7 @@ console.log("Logging IN: ", isLoggedIn);
         </div>
       </div>
     );
-  } else {
+  } else if(user) {
     return (
       <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
         <div className="gpt3__navbar">

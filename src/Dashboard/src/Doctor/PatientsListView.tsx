@@ -14,9 +14,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Sidebar from '../layout/Sidebar/Sidebar';
 import Navbar from '../../../LandingPage/navbar/Navbar';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-
-
-export default function DoctorsPatientListView({user}){
+import { useEffect,useState } from 'react';
+import {url} from '../../../config.js';
+import axios from 'axios';
+export default function DoctorsPatientListView({user,role}){
     interface Column {
         id: 'PatientName' | 'PhoneNumber' | 'DoctorAssignedTo'|'Email';
         label: string;
@@ -25,15 +26,11 @@ export default function DoctorsPatientListView({user}){
         format?: (value: number) => string;
       }
       
-      const columns: readonly Column[] = [
+      const columns: readonly Column[] = 
+      [
         { id: 'PatientName', label: 'PatientName', minWidth: 170 },
         { id: 'PhoneNumber', label: 'PhoneNumber', minWidth: 100 },
-        {
-          id: 'DoctorAssignedTo',
-          label: 'DoctorAssignedTo',
-          minWidth: 170,
-          align: 'right',
-        },
+        {id: 'DoctorAssignedTo', label: 'DoctorAssignedTo',minWidth: 170,align: 'right'},
         {id:'Email',label:'Email'},
        
       ];
@@ -44,6 +41,7 @@ export default function DoctorsPatientListView({user}){
         PhoneNumber: string;
         DoctorAssignedTo: string;
         Email:string
+        patientid:string;
       }
       
       function createData(
@@ -52,27 +50,45 @@ export default function DoctorsPatientListView({user}){
         PhoneNumber: string,
         DoctorAssignedTo: string,
         Email:string,
+        patientid:string,
       ): Data {
-        return { id, PatientName,PhoneNumber, DoctorAssignedTo,Email};
+        return { id, PatientName,PhoneNumber, DoctorAssignedTo,Email,patientid};
       }
       
-      const rows = [
-        createData(1, 'Habiba Mohamed',  '0123456789','Dr.Mina','Habiba@gmail.com'),
-        createData(2, 'Youssef Ali',  '0123456789','Dr.Mina','Youssef@gmail.com'),
-        createData(3, 'Mohamed Wael',  '0123456789','Dr.Mina','Mohamed@gmail.com'),
-        createData(4, 'Mai Mourad',  '0123456789','Dr.Mina','Mai@gmail.com'),
-        createData(5, 'Wael Gaser',  '0123456789','Dr.Mina','Wael@gmail.com'),
-        createData(6, 'Safwat Ali',  '0123456789','Dr.Mina','Safwat@gmail.com'),
-        createData(7, 'Reem Nabil',  '0123456789','Dr.Mina','Reem@gmail.com'),
-        createData(8, 'Tamer Alaa',  '0123456789','Dr.Mina','Tamer@gmail.com'),
-        createData(9, 'Hazem Waleed',  '0123456789','Dr.Mina','Hazem@gmail.com'),
-      ];
+   
       
       
-          
-          
-       
-       
+      const [page, setPage] = React.useState(0);
+      const [rowsPerPage, setRowsPerPage] = React.useState(10);
+      const [rows, setRows] = useState<Data[]>([]);
+
+      useEffect(() => {
+    let geturl ="GetDoctorPatients?doctorid="+user['id'];
+    geturl=url+geturl;
+   
+    console.log("The Role is : "+role);
+  
+        if(role=="Doctor"){
+        axios.get(geturl).then((response) => {
+          const patient = response.data.data;
+         
+          const newRows = patient.map((patient: any, index: number) =>
+            createData(
+              index + 1,
+              patient.name,
+        
+              
+              patient.phone,
+              patient.assignedDrName,
+              patient.email,
+              patient.id,
+            )
+          );
+          console.log("Rows ",newRows);
+          setRows(newRows);
+        });
+      }
+      }, []);
         const navigate = useNavigate();
       
         const handleCellClick = (row: Data) => {
@@ -80,9 +96,6 @@ export default function DoctorsPatientListView({user}){
           // Navigate to DoctorDetails page and pass rowData as state
           navigate('/PatientDetails', { state: { patient: row as Data } });
         };
-      
-        const [page, setPage] = React.useState(0);
-        const [rowsPerPage, setRowsPerPage] = React.useState(10);
       
         const handleChangePage = (event: unknown, newPage: number) => {
           setPage(newPage);

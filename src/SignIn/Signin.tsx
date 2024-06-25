@@ -45,34 +45,37 @@ export default function JoySignInSideTemplate() {
     password:'',
    
   });
-  function handleNavigation (data:any)  {
-    console.log(url+"LoginAsync");
-    let poststring=url+"LoginAsync";
-    axios.post(poststring,data).then(function(response)
-    {
+  const handleNavigation = async (data) => {
+   
+  
+    try {
+      console.log(url + "LoginAsync");
+      let poststring = url + "LoginAsync";
+      const response = await axios.post(poststring, data);
+  
       console.log(data);
       console.log(response.data.isSuccess);
-      if(response.data.isSuccess)
-    { 
-      var token= response.data.message;
-      var user= jwtDecode(token)
-      var role=user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
-     
-      console.log(token)
-      console.log(response.data)
-      localStorage.setItem('userToken',token);
-      navigate('/Dashboard');
-    }
-    else{
-      alert("Wrong Email or Password")
-    }
-  }) 
-    // Replace '/another-link' with the desired URL
   
-  };
+      if (response.data.isSuccess) {
+        var token = response.data.message;
+        var user = jwtDecode(token);
+        var role = user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+  
+        console.log(token);
+        console.log(response.data);
+  
+        localStorage.setItem('userToken', token);
+        navigate('/Dashboard');
+      } else {
+        alert("Wrong Email or Password");
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      // Handle error state or alert user about login failure
+      alert("An error occurred during login. Please try again later.");
+    }
 
-
-
+  }
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
       <CssBaseline />

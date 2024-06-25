@@ -9,9 +9,7 @@ const Report = () => {
     <div className="grid-one-item grid-common grid-c3">
         <div className="grid-c-title">
             <h3 className="grid-c-title-text">Treatment Progress</h3>
-            <button className="grid-c-title-icon">
-                <img src={ iconsImgs.plus } alt="Plus Icon" />
-            </button>
+          
         </div>
         <div className="grid-c3-content">
             <div className="grid-chart">

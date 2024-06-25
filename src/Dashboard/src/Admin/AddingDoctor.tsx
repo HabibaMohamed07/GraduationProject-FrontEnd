@@ -99,10 +99,10 @@ export default function AddDoctor() {
                     email: formElements.email.value,
                     password:formElements.email.value.split("@")[0]+'@'+24,
                     name:formElements.name.value.trim().replace(/\s+/g, ''),
-                    age: 0,
-                    phoneNumber: formElements.number.value,
-                    gender:"male",
-                    patientHistory:"String"
+                    // age: 0,
+                    // phoneNumber: formElements.number.value,
+                    // gender:"male",
+                    // patientHistory:"String"
                   };
                   alert(JSON.stringify(data, null, 2));
            

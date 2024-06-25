@@ -105,7 +105,7 @@ export default function PatientDetails({user})
         spacing={4}
        
       >
-      <div className="grid-one-item grid-common grid-c2 " style={{position:'relative',margin:'10vh',height:'auto',width:'100%' ,maxWidth:'900px'}}>
+      <div className="grid-one-item grid-common grid-c2 " style={{position:'relative',margin:'10vh',height:'auto',width:'100%' ,maxWidth:'1000px'}}>
         
 
         <div className="grid-content ">
@@ -168,13 +168,13 @@ export default function PatientDetails({user})
 
 
 
-            <div style={{display:'grid',gridColumn:'1'}}>
+            <div style={{display:'grid',gridColumn:'1',marginLeft:'50px'}}>
             <div className="subgrid-two-item grid-common grid-c7 scroll">
                 <Report/>
                 
             </div>
             <div className="scroll">
-            <Budget user={user}  />
+            <Budget user={user} isPatient={true} patientId={receivedObject.patient.patientid} />
             </div>
     <Button onClick={()=>handleClick()} variant="contained" sx={{marginTop:'10px'}} color="success">
         Add
