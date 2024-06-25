@@ -38,7 +38,7 @@ if (role=='Patient'&&user){
       <div className="info-img img-fit-cover">
         <img src={personsImgs.person_two} alt="profile image" />
       </div>
-      <span className="info-name">Habiba</span>
+      <span className="info-name">{user['name']}</span>
 
       <nav className="navigation">
         <ul className="nav-list">

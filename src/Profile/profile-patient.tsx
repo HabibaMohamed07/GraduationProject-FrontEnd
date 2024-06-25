@@ -40,7 +40,7 @@ const theme= createTheme({
     mode:'dark',
   }
 });
-export default function MyProfile() {
+export default function MyProfile({user,role}) {
  
   return (
     <CssVarsProvider defaultMode="dark" disableTransitionOnChange>
@@ -107,15 +107,15 @@ export default function MyProfile() {
                 <FormControl
                   sx={{ display: { sm: 'flex-column', md: 'flex-row' }, gap: 2 }}
                 >
-                  <Input size="sm" placeholder="First name" />
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} />
-                  <Input size="sm" placeholder="Phone Number" sx={{ flexGrow: 1 }} />
+                  <Input size="sm" placeholder="First name" value={user['name']} />
+                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 }} disabled value={user['assignedDrName'] ? `Supervised by Dr.${user['assignedDrName']}` : "Still not assigned to a doctor"} />
+                  <Input size="sm" placeholder="Phone Number" sx={{ flexGrow: 1 }}  value={user['phone']}/>
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
                 <FormControl>
                   <FormLabel>Role</FormLabel>
-                  <Input size="sm" defaultValue="Patient" disabled />
+                  <Input size="sm" defaultValue={role} disabled />
                 </FormControl>
                 
                 <FormControl sx={{ flexGrow: 1 }}>
@@ -125,15 +125,12 @@ export default function MyProfile() {
                     type="email"
                     startDecorator={<EmailRoundedIcon />}
                     placeholder="email"
-                    defaultValue="habiba@gmail.com"
+                   value={user['email']}
                     sx={{ flexGrow: 1 }}
                   />
                 </FormControl>
               </Stack>
-              <FormControl>
-                  <FormLabel>Job Title</FormLabel>
-                  <Input size="sm" defaultValue="N/A" />
-                </FormControl>
+          
              
             </Stack>
           </Stack>

@@ -12,7 +12,7 @@ const DoctorComments = ({user}) => {
     <Sidebar user={user} role="Patient" />
     <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' } } className="app profile" >
       <div style={{ width: '80%', maxWidth: '800px' }}>
-        <Budget user={user} />
+        <Budget user={user} isPatient={true}  patientId={user['id']}/>
       </div>
     </div>
   </div>

@@ -4,11 +4,11 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 export const navigationLinks = [
     { id: 1, title: 'Dashboard', image: iconsImgs.home,link:'Dashboard' },
     { id: 2, title: 'DoctorComments', image: iconsImgs.budget,link:'DoctorComments' },
-    { id: 3, title: 'Targets', image: iconsImgs.plane,link:'Targets' },
-    { id: 4, title: 'GameCalendar', image: iconsImgs.wallet,link:'GameCalender' },
-    { id: 5, title: 'SubscriptionDetails', image: iconsImgs.bills,link:'SubscriptionDetails' },
-    { id: 6, title: 'TreatmentProgress', image: iconsImgs.report ,link:'TreatmentProgress'},
-    { id: 8, title: 'LastGamePlayed', image: iconsImgs.wealth ,link:'LastGamePlayed'},
+    // { id: 3, title: 'Targets', image: iconsImgs.plane,link:'Targets' },
+    // { id: 4, title: 'GameCalendar', image: iconsImgs.wallet,link:'GameCalender' },
+    // { id: 5, title: 'SubscriptionDetails', image: iconsImgs.bills,link:'SubscriptionDetails' },
+    // { id: 6, title: 'TreatmentProgress', image: iconsImgs.report ,link:'TreatmentProgress'},
+    // { id: 8, title: 'LastGamePlayed', image: iconsImgs.wealth ,link:'LastGamePlayed'},
     { id: 8, title: 'StartGame', image:iconsImgs.controller,link:'SelectGame' },
     { id: 9, title: 'Profile', image: iconsImgs.user ,link:'Profile'},
     { id: 10, title: 'Settings', image: iconsImgs.gears ,link:'Settings'}

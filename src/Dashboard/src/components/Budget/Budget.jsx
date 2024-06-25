@@ -75,11 +75,11 @@ const Budget = ({ user, isPatient, patientId }) => {
                
              
     
-                {commentItem.id != null && (
-        <IconButton aria-label="delete" size="small" sx={{ color: 'red' }} onClick={() => deleteComment(commentItem.id)}>
-          <DeleteIcon fontSize="small" />
-        </IconButton>
-      )}
+                {commentItem.id != null && !isPatient && (
+  <IconButton aria-label="delete" size="small" sx={{ color: 'red' }} onClick={() => deleteComment(commentItem.id)}>
+    <DeleteIcon fontSize="small" />
+  </IconButton>
+)}
               </div>
             </div>
           ))}

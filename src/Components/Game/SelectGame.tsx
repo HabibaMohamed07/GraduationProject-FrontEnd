@@ -14,7 +14,7 @@ import Connectingheadset from './Connectingheadset.tsx';
 import Choosinggame from './choosinggame.tsx';
 import Navbar from '../../LandingPage/navbar/Navbar';
 const steps = ['Connecting To Arm', 'Connecting To HeadSet', 'Choosing Game'];
-export default function SelectGame() {
+export default function SelectGame({user}) {
     const totalSteps = steps.length;
     const [activeStep, setActiveStep] = React.useState(0); 
    

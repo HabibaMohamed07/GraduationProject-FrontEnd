@@ -23,14 +23,18 @@ const Transactions = ({user,role}) => {
                   <div className="avatar img-fit-cover">
                     <img src={profilepic} alt="" />
                   </div>
-                  <p className="text">
-                    {" "}
-                    {user['name']}<span> </span>
-                  </p>
-                </div>
+                  <div>
+              <p className="text">{user['name']}</p>
+              <p className="text-scarlet" style={{ fontSize: '9px' }}>
+                Supervised by Dr. {user['assignedDrName']}
+              </p>
+            </div>
                 <div className="grid-item-r">
                   <span className="text-scarlet"> No Medications</span>
                 </div>
+                
+                
+              </div>
               </div>
             }
           </div>
