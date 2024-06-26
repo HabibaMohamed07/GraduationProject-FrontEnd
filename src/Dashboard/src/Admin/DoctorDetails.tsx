@@ -26,18 +26,9 @@ export default function DoctorDetails({user,role}) {
     const receivedObject = location.state;
     console.log(receivedObject);
 
-    useEffect(()=>{
-        let geturl ="GetDoctorPatients?doctorid="+user['id'];
-        geturl=url+geturl;
-        axios.get(geturl).then((response) => {
-        
-
-        })
-      
-
-    })
+   
     const handleClick = () => {
-      console.log('Assigning Doctor...'+receivedObject.doctor.DoctorName);
+      console.log('Assigning Doctor...'+receivedObject.doctor.doctorid);
       // Navigate to DoctorDetails page and pass rowData as state
       navigate('/AssignDoctor', { state: { receivedObject } });
     };

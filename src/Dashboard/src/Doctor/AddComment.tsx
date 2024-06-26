@@ -71,13 +71,15 @@ export default function AddingComment({user})
         onSubmit={() => { 
         console.log("Adding Comment..",textAreaValue)
         let posturl=url+"AddComment";
+        console.log(posturl)
         let data={
        
           patientId:received.receivedObject.patient.patientid,
           doctorId:user['id'],
           message:textAreaValue,
           sender:user['name'],
-
+          receiver:received.receivedObject.patient.PatientName,
+          date:"2024-06-26T19:36:45.278Z",
         };
       
         console.log(data);
@@ -86,7 +88,7 @@ export default function AddingComment({user})
           if (response.data.isSuccess) {
             setOpen(true);
           } else {
-            alert("Couldn't add user: "+response.data.message);
+            alert("Couldn't add comment: "+response.data.message);
           }
         });
         } 

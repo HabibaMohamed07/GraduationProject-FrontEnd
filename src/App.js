@@ -201,7 +201,7 @@ function AppContent() {
          <Route path="/Dashboard" element={<PrivateRoute><Dashboard user={user} role={role}/></PrivateRoute>}/>
          <Route path='/TreatmentProgress' element={<PrivateRoute><TreatmentProgress user={user}/></PrivateRoute>} />
          <Route path='/LastGamePlayed' element={<PrivateRoute> <LastGamePlayed user={user}/></PrivateRoute>} />
-         <Route path='/DoctorComments' element={<PrivateRoute> <DoctorComments user={user}/></PrivateRoute>} />
+         <Route path='/DoctorComments' element={<PrivateRoute> <DoctorComments user={user} role={role}/></PrivateRoute>} />
          <Route path='/SubscriptionDetails' element={<PrivateRoute><SubscriptionDetails ueser={user}/></PrivateRoute>} />
 
          </>)}

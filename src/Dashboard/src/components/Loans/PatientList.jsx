@@ -18,13 +18,14 @@ const PatientList = ({ user,role,isDoctorDetail,doctorId }) => {
   }
   else if(role=="Admin")
   {
-    if(isDoctorDetail){
+    if(!isDoctorDetail){
     geturl="GetAllPatients";
     geturl=url+geturl;
     }
     else {
       geturl="GetDoctorPatients?doctorid="+doctorId;
     geturl=url+geturl;
+    console.log(geturl);
     }
   }
   

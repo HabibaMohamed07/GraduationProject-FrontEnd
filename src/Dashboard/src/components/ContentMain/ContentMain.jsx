@@ -21,7 +21,7 @@ const ContentMain = ({user,role}) => {
             <Report />
         </div>
         <div className="content-grid-two">
-            <Budget user={user} isPatient={true} patientId={user['id']}/>
+            <Budget user={user} role={role} isPatient={false} patientId={user['id']}/>
             <div className="grid-two-item">
               <div className="subgrid-two">
                 <Subscriptions role={role}/>
@@ -102,7 +102,7 @@ const ContentMain = ({user,role}) => {
                 <div className="subgrid-two">
                   
                
-                  <PatientList user={user} role={role}/>
+                  <PatientList user={user} role={role} isDoctorDetail={false}/>
                   </div>
                
               </div>

@@ -79,7 +79,7 @@ export default function DoctorListView({role}) {
           doctor.numOfPatients,
           doctor.phonenumber,
           doctor.email,
-          doctor.doctorid
+          doctor.id
         )
       );
       setRows(newRows);

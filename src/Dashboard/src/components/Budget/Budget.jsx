@@ -7,14 +7,14 @@ import { url } from "../../../../config";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const Budget = ({ user, isPatient, patientId }) => {
+const Budget = ({ user, role,isPatient, patientId }) => {
   const [comments, setComments] = useState([]);
   const [refresh, setRefresh] = useState(false);
   console.log('user', user['id']);
 
   useEffect(() => {
     let geturl = "";
-    if (isPatient) {
+    if (isPatient ||role=='Patient') {
       geturl = `${url}GetAllCommentsByPatientId?id=${patientId}`;
     } else {
       geturl = `${url}GetAllCommentsByDoctorId?id=${user['id']}`;
@@ -75,7 +75,7 @@ const Budget = ({ user, isPatient, patientId }) => {
                
              
     
-                {commentItem.id != null && !isPatient && (
+                {commentItem.id != null && isPatient && (
   <IconButton aria-label="delete" size="small" sx={{ color: 'red' }} onClick={() => deleteComment(commentItem.id)}>
     <DeleteIcon fontSize="small" />
   </IconButton>
