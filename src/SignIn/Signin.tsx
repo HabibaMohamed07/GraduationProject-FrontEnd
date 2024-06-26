@@ -52,7 +52,7 @@ export default function JoySignInSideTemplate() {
       console.log(url + "LoginAsync");
       let poststring = url + "LoginAsync";
       const response = await axios.post(poststring, data);
-  
+      console.log(poststring)
       console.log(data);
       console.log(response.data.isSuccess);
   

@@ -41,6 +41,7 @@ interface Data {
   PatientsSupervising: number;
   PhoneNumber:string;
   Email:string
+  doctorid:string;
 }
 
 function createData(
@@ -50,8 +51,9 @@ function createData(
   PatientsSupervising: number,
   PhoneNumber:string,
   Email:string,
+  doctorid:string,
 ): Data {
-  return { id, DoctorName, Status, PatientsSupervising,PhoneNumber,Email};
+  return { id, DoctorName, Status, PatientsSupervising,PhoneNumber,Email,doctorid};
 }
 
 
@@ -76,7 +78,8 @@ export default function DoctorListView({role}) {
           'Available',
           doctor.numOfPatients,
           doctor.phonenumber,
-          doctor.email
+          doctor.email,
+          doctor.doctorid
         )
       );
       setRows(newRows);

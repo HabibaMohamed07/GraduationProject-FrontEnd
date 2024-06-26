@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from "../layout/Sidebar/Sidebar";
 import Stack from '@mui/joy/Stack';
@@ -13,14 +13,29 @@ import EditIcon from '@mui/icons-material/Edit';
 import { purple } from '@mui/material/colors';
 import './DoctorList.css';
 import Navbar from "../../../LandingPage/navbar/Navbar";
+import { url } from "../../../config";
+import axios from "axios";
+import PatientList from "../components/Loans/PatientList";
 
-export default function DoctorDetails({user}) {
+
+
+
+export default function DoctorDetails({user,role}) {
     const navigate=useNavigate();
     const location = useLocation();
     const receivedObject = location.state;
     console.log(receivedObject);
 
-    
+    useEffect(()=>{
+        let geturl ="GetDoctorPatients?doctorid="+user['id'];
+        geturl=url+geturl;
+        axios.get(geturl).then((response) => {
+        
+
+        })
+      
+
+    })
     const handleClick = () => {
       console.log('Assigning Doctor...'+receivedObject.doctor.DoctorName);
       // Navigate to DoctorDetails page and pass rowData as state
@@ -60,9 +75,9 @@ export default function DoctorDetails({user}) {
                 >
                  <div style={{display:'flex'}}>
                   <Input size="sm" placeholder="First name" defaultValue={receivedObject.doctor.DoctorName} />
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 , marginLeft:'10px'}}  />
+                  <Input size="sm" placeholder="No of patients" sx={{ flexGrow: 1 , marginLeft:'10px'}} defaultValue={'Supervising '+receivedObject.doctor.PatientsSupervising+' Patients'} disabled />
                   </div>
-                  <Input size="sm" placeholder="Phone Number" sx={{ flexGrow: 1 }}  defaultValue={receivedObject.doctor.PhoneNumber}/>
+                  {/* <Input size="sm" placeholder="Phone Number" sx={{ flexGrow: 1 }}  defaultValue={receivedObject.doctor.PhoneNumber}/> */}
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
@@ -103,42 +118,9 @@ export default function DoctorDetails({user}) {
 
             <div style={{display:'grid',gridColumn:'1'}}>
             <div className="subgrid-two-item grid-common grid-c7 scroll">
-        <div className="grid-c-title">
-            <h3 className="grid-c-title-text">Pateints List</h3>
-          
-        </div>
+      
         <div className="grid-c7-content" style={{position:'relative' , display:'grid' , paddingTop:'40px', gap: '25px',width:'100%'}}>
-          <ul>Habiba Mohamed Abdelrhman Salem  
-           <Button variant="outlined"  color="error" sx={{marginLeft:'10px'}} startIcon={<DeleteIcon  sx={{  color: purple[50] }}/>} >
-             Delete
-           </Button>
-           
-     </ul> 
-          <ul>Habiba Mohamed 
-          <Button variant="outlined"  color="error" sx={{marginLeft:'10px'}} startIcon={<DeleteIcon  sx={{  color: purple[50] }}/>} >
-             Delete
-           </Button>
-          </ul>
-          <ul>Habiba Mohamed
-          <Button variant="outlined"  color="error" sx={{marginLeft:'10px'}} startIcon={<DeleteIcon  sx={{  color: purple[50] }}/>} >
-             Delete
-           </Button>
-          </ul>
-          <ul>Habiba Mohamed
-          <Button variant="outlined"  color="error" sx={{marginLeft:'10px'}} startIcon={<DeleteIcon  sx={{  color: purple[50] }}/>} >
-             Delete
-           </Button>
-          </ul>
-          <ul>Habiba Mohamed
-          <Button variant="outlined"  color="error" sx={{marginLeft:'10px'}} startIcon={<DeleteIcon  sx={{  color: purple[50] }}/>} >
-             Delete
-           </Button>
-          </ul>
-          <ul>Habiba Mohamed
-          <Button variant="outlined"  color="error" sx={{marginLeft:'10px'}} startIcon={<DeleteIcon  sx={{  color: purple[50] }}/>} >
-             Delete
-           </Button>
-          </ul>
+        <PatientList user={user} role={role} isDoctorDetail={true} doctorId={receivedObject.doctor.doctorid}/>
         
     </div>
    

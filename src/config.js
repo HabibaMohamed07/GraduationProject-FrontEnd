@@ -1,1 +1,1 @@
-export let url="https://localhost:44368/"
+export let url="http://localhost:5192/"

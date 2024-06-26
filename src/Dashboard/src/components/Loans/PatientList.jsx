@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from 'react';
 import { url } from "../../../../config";
 
-const PatientList = ({ user,role }) => {
+const PatientList = ({ user,role,isDoctorDetail,doctorId }) => {
   
   const [patients, setPatients] = useState([]);
   console.log("Users:",user)
@@ -18,11 +18,16 @@ const PatientList = ({ user,role }) => {
   }
   else if(role=="Admin")
   {
+    if(isDoctorDetail){
     geturl="GetAllPatients";
     geturl=url+geturl;
-   
+    }
+    else {
+      geturl="GetDoctorPatients?doctorid="+doctorId;
+    geturl=url+geturl;
+    }
   }
-
+  
     axios.get(geturl)
       .then(function (response) {
         
@@ -43,9 +48,7 @@ const PatientList = ({ user,role }) => {
 <div className="subgrid-two-item grid-common grid-c7 scroll">
       <div className="grid-c-title">
         <h3 className="grid-c-title-text">Patients List</h3>
-        <button className="grid-c-title-icon">
-          <img src={iconsImgs.plus} />
-        </button>
+       
       </div>
       <div className="grid-c7-content" style={{ position: 'relative', display: 'grid', paddingTop: '40px', gap: '25px' }}>
         {patients.map((patient, index) => (

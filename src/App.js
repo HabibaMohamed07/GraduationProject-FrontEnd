@@ -176,7 +176,7 @@ function AppContent() {
 
           {checkrole=="Admin" &&( <>
          <Route path='/AssignDoctor' element={<PrivateRoute><AssignDoctor user={user}/></PrivateRoute>}/>
-         <Route path='/DoctorDetails' element={<PrivateRoute><DoctorDetails user={user}/></PrivateRoute>} />
+         <Route path='/DoctorDetails' element={<PrivateRoute><DoctorDetails user={user} role={role}/></PrivateRoute>} />
          <Route path='/DoctorsList' element={<PrivateRoute><DoctorListPage user={user} role={role}/></PrivateRoute>}/>
          <Route path='/PatientsList' element={<PrivateRoute><PatientListPageContent user={user} role={role}/></PrivateRoute>}/>
          <Route path='/Profile' element={<PrivateRoute><Profile user={user} role={role}/></PrivateRoute>}/>
