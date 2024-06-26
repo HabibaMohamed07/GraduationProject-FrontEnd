@@ -7,7 +7,7 @@ function App({ user,role }) {
 
     return (
  <>
-           <Navbar isLoggedIn={true} user={user}  />
+           <Navbar isLoggedIn={true} user={user}  role={role} />
         <div className="app">
           <Sidebar  user ={user} role={role} />
           <Content user={user} role={role} />

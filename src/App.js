@@ -172,7 +172,7 @@ function AppContent() {
 
           <Route path="/Signin" element={<><div className="black"> <Navbar/> </div><Signin /></>} />
           <Route path="/Signup"  element={<><div className="black"> <Navbar/> </div><Signup /></>} />
-          <Route path="/*" element={<Front user={user} />}/>
+          <Route path="/*" element={<Front user={user} role={role}/>}/>
 
           {checkrole=="Admin" &&( <>
          <Route path='/AssignDoctor' element={<PrivateRoute><AssignDoctor user={user}/></PrivateRoute>}/>
@@ -193,7 +193,7 @@ function AppContent() {
          </>)}  
          {checkrole=="Patient" &&(<>
          <Route path="/Settings" element={<PrivateRoute><Settings  user={user} role={role}/></PrivateRoute>}/>
-         <Route path='/game' element={<PrivateRoute><Navbar user={user} isLoggedIn={true}/><Tennis user={user} /></PrivateRoute>}/>
+         <Route path='/game' element={<PrivateRoute><Navbar user={user} isLoggedIn={true} role={role}/><Tennis user={user} /></PrivateRoute>}/>
          <Route path='/selectgame' element={<PrivateRoute><SelectGame user={user}/></PrivateRoute>}/>
          <Route path='/GameCalendar' element={<PrivateRoute><GameCalendar user={user}/></PrivateRoute>} />
          <Route path='/Profile' element={<PrivateRoute><Profile user={user} role={role}/></PrivateRoute>}/>

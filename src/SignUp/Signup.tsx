@@ -310,7 +310,7 @@ export default function JoySignInSideTemplate() {
                     phoneNumber: formElements.PhoneNumber.value,
                     gender: formElements.Gender.value
                   }));
-                  alert(JSON.stringify(data, null, 2));
+                  // alert(JSON.stringify(data, null, 2));
                   handleNext();
                 }}
               >

@@ -35,7 +35,7 @@ export default function DoctorDetails({user,role}) {
   
     return (
       <>
-      <div className="black"><Navbar isLoggedIn={true} user={user}/></div>
+      <div className="black"><Navbar isLoggedIn={true} user={user} role={role}/></div>
         <div className="app profile">
         <Sidebar user={user} role={'Admin'} />
     

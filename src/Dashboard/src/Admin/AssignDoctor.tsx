@@ -52,7 +52,7 @@ export default function AssignDoctor({ user }) {
 
   return (
     <>
-      <div className="black"><Navbar isLoggedIn={true} user={user} /></div>
+      <div className="black"><Navbar isLoggedIn={true} user={user} role={"Admin"}/></div>
 
       <div className="app profile">
         <Sidebar user={user} role={'Admin'} />

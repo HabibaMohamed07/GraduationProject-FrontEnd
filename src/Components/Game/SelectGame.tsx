@@ -35,7 +35,7 @@ export default function SelectGame({user}) {
     };
     return (
       <>
-      <div className="black"><Navbar isLoggedIn={true}user={user}/></div>
+      <div className="black"><Navbar isLoggedIn={true}user={user} role={'Patient'}/></div>
         <div className='black' style={{height:'100%'}}>      
          <Box
             component="main"

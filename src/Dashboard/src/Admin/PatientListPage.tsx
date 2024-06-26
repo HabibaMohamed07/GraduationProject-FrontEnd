@@ -65,7 +65,7 @@ export default function PatientListPageContent({user,role}) {
 
   return (
     <>
-    <div className="black"><Navbar isLoggedIn={true} user={user}/></div>
+    <div className="black"><Navbar isLoggedIn={true} user={user} role={role}/></div>
     <div className="app profile">
     <Sidebar user={user} role={'Admin'} />
     <Box sx={{ width: '100%' ,height:'auto' ,backgroundColor:'rgb(4,12,24)'}}>

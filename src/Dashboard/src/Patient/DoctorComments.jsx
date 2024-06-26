@@ -7,7 +7,7 @@ import Navbar from '../../../LandingPage/navbar/Navbar';
 const DoctorComments = ({user,role}) => {
   return (
     <>
-    <div className="black"><Navbar isLoggedIn={true} user={user} /></div>
+    <div className="black"><Navbar isLoggedIn={true} user={user} role={role} /></div>
     <div style={{ display: 'flex' }}>
     <Sidebar user={user} role="Patient" />
     <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' } } className="app profile" >

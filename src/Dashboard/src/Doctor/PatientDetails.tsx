@@ -32,7 +32,7 @@ import Box from '@mui/joy/Box';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ViewHistory from "./ViewHistory.tsx";
 import Navbar from "../../../LandingPage/navbar/Navbar";
-
+import { personsImgs } from "../utils/images";
 
 interface Data {
     id: number;
@@ -97,7 +97,7 @@ export default function PatientDetails({user})
     };
   
     return (
-      <><div className="black"><Navbar isLoggedIn={true} user={user}/></div>
+      <><div className="black"><Navbar isLoggedIn={true} user={user} role={"Doctor"}/></div>
         <div className="app profile">
         <Sidebar user={user} role={'Doctor'} />
     
@@ -116,7 +116,7 @@ export default function PatientDetails({user})
                 <div className="PersonalInfo" >
                 <div className="ImgeandTitle">
                   <div className="avatar img-fit-cover"  style={{ width: '150px', height: '150px' ,maxHeight:'150px',maxWidth:'150px'}}>
-                    <img  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"  alt="" />
+                    <img  src={personsImgs.person_two}  alt="" />
                   
                   </div>
                   <h1 style={{marginLeft:'2rem'}}>{receivedObject.patient.PatientName}</h1>
@@ -128,10 +128,10 @@ export default function PatientDetails({user})
                 <FormLabel>Personal Info</FormLabel>
                
                  <div style={{display:'flex'}}>
-                  <Input size="sm" placeholder="First name" defaultValue={receivedObject.patient.PatientName} />
-                  <Input size="sm" placeholder="Last name" sx={{ flexGrow: 1 , marginLeft:'10px'}}  />
+                  <Input size="sm" placeholder="First name" sx={{ flexGrow: 1 }}  defaultValue={receivedObject.patient.PatientName}  disabled/>
+                 
                   </div>
-                  <Input size="sm" placeholder="Phone Number" sx={{ flexGrow: 1 }}  defaultValue={receivedObject.patient.PhoneNumber}/>
+                  <Input size="sm" placeholder="Phone Number" sx={{ flexGrow: 1 }}  defaultValue={receivedObject.patient.PhoneNumber} disabled/>
                 
               </Stack>
               <Stack direction="row" spacing={2}>
@@ -149,6 +149,7 @@ export default function PatientDetails({user})
                     placeholder="email"
                     defaultValue={receivedObject.patient.Email}
                     sx={{ flexGrow: 1 }}
+                    disabled
                   />
                 </FormControl>
 
@@ -174,7 +175,7 @@ export default function PatientDetails({user})
                 
             </div>
             <div className="scroll">
-            <Budget user={user} isPatient={true} patientId={receivedObject.patient.patientid} />
+            <Budget user={user} isPatient={true} role={"Doctor"} patientId={receivedObject.patient.patientid} />
             </div>
     <Button onClick={()=>handleClick()} variant="contained" sx={{marginTop:'10px'}} color="success">
         Add

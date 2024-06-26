@@ -9,7 +9,7 @@ export default function MyProfile({ user, role }) {
   console.log("MyProfile: ",user)
   if (role === "Patient") {
     return (<>
-      <div className="black"><Navbar isLoggedIn={true}user={user}/></div>
+      <div className="black"><Navbar isLoggedIn={true}user={user} role={role}/></div>
       <div className="app profile">
         <Sidebar user={user} role={role} />
         <ProfilePatient user={user} role={role} />;
@@ -19,7 +19,7 @@ export default function MyProfile({ user, role }) {
   } else if (role === "Doctor") {
     return (
       <>
-      <div className="black"><Navbar isLoggedIn={true}user={user}/></div>
+      <div className="black"><Navbar isLoggedIn={true}user={user} role={role}/></div>
       <div className="app profile">
         <Sidebar user={user} role={role} />
         <ProfileDoctor user={user} role={role} />;
@@ -29,7 +29,7 @@ export default function MyProfile({ user, role }) {
   } else if (role === "Admin") {
     return (
       <>
-      <div className="black"><Navbar isLoggedIn={true}user={user}/></div>
+      <div className="black"><Navbar isLoggedIn={true}user={user} role={role}/></div>
       <div className="app profile">
         <Sidebar user={user} role={role} />
         <ProfileAdmin user={user} role={role} />;

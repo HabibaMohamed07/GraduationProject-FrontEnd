@@ -18,7 +18,7 @@ import { personsImgs } from '../../Dashboard/src/utils/images';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssVarsProvider } from '@mui/joy';
 
-const Navbar = ({ isLoggedIn, user }) => {
+const Navbar = ({ isLoggedIn, user,role }) => {
   const navigate = useNavigate();
 console.log("Logging IN: ", isLoggedIn);
   const theme = createTheme({
@@ -112,10 +112,23 @@ console.log("Logging IN: ", isLoggedIn);
                   size="sm"
                   sx={{ maxWidth: '32px', maxHeight: '32px', borderRadius: '9999999px', backgroundColor: 'transparent' }}
                 >
-                  <Avatar
-                    src={personsImgs.person_two}
-                    sx={{ maxWidth: '32px', maxHeight: '32px' }}
-                  />
+                  {role==="Admin"?(
+                 <Avatar
+                 src={"https://images.unsplash.com/flagged/photo-1573603867003-89f5fd7a7576?q=80&w=1946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+                 sx={{ maxWidth: '32px', maxHeight: '32px' }}
+               />
+             ): role === "Doctor" ? (
+               <Avatar
+                 src={"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"}
+                 sx={{ maxWidth: '32px', maxHeight: '32px' }}
+               />
+             ) : role === "Patient" ? (
+               <Avatar
+                 src={personsImgs.person_two}
+                 sx={{ maxWidth: '32px', maxHeight: '32px' }}
+               />
+             ) :null }
+                 
                 </MenuButton>
                 <Menu
                   placement="bottom-end"
@@ -134,10 +147,22 @@ console.log("Logging IN: ", isLoggedIn);
                         alignItems: 'center',
                       }}
                     >
-                      <Avatar
-                        src={personsImgs.person_two}
-                        sx={{ borderRadius: '50%' }}
-                      />
+                    {role === "Admin" ? (
+                                <Avatar
+                                  src={"https://images.unsplash.com/flagged/photo-1573603867003-89f5fd7a7576?q=80&w=1946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+                                  sx={{ borderRadius: '50%' }}
+                                />
+                              ) : role === "Doctor" ? (
+                                <Avatar
+                                  src={"https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"}
+                                  sx={{ borderRadius: '50%' }}
+                                />
+                              ) : role === "Patient" ? (
+                                <Avatar
+                                  src={personsImgs.person_two}
+                                  sx={{ borderRadius: '50%' }}
+                                />
+                              ) :null }
                       <Box sx={{ ml: 1.5 }}>
                         <Typography level="title-sm" textColor="text.primary">
                           {user.name}

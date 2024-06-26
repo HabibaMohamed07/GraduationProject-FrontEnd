@@ -108,7 +108,7 @@ export default function MyProfile({user,role}) {
                 >
                   <Input size="sm" placeholder="First name" value={user['name']}/>
                   {/* <Input size="sm" placeholder="Email" sx={{ flexGrow: 1 }} value={user['email']} /> */}
-                  <Input size="sm" placeholder="Phone Number" sx={{ flexGrow: 1 }} value={user['phonenumber']} />
+                  <Input size="sm" placeholder="Phone Number" sx={{ flexGrow: 1 }} value={user['email']} />
                 </FormControl>
               </Stack>
               <Stack direction="row" spacing={2}>
@@ -117,17 +117,7 @@ export default function MyProfile({user,role}) {
                   <Input size="sm" value={role} disabled />
                 </FormControl>
                 
-                <FormControl sx={{ flexGrow: 1 }}>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    size="sm"
-                    type="email"
-                    startDecorator={<EmailRoundedIcon />}
-                    placeholder="email"
-                    value={user['email']}
-                    sx={{ flexGrow: 1 }}
-                  />
-                </FormControl>
+               
               </Stack>
            
               <span className="text-scarlet"> Supervising {user['numOfPatients']} patients</span>

@@ -8,11 +8,11 @@ import '../App.css';
 import '../front.css';
 
 
-const Front = ({user}) => (
+const Front = ({user,role}) => (
   <div className="App">
     <div className="gradient__bg">
     
-    <Navbar user={user} isLoggedIn={localStorage.getItem('userToken') !== null?true:false}  />
+    <Navbar user={user} isLoggedIn={localStorage.getItem('userToken') !== null?true:false} role={role}  />
     <Header  />
    
     </div>
