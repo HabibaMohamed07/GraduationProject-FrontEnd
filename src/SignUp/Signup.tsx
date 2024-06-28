@@ -99,6 +99,31 @@ export default function JoySignInSideTemplate() {
       gender:'',
       patientHistory:''
     });
+
+    const [warning, setWarning] = React.useState('');
+    const [password, setPassword] = React.useState('');
+  
+    const handleFocus = () => {
+      setWarning('Password must contain:\n 1- At least one capital letter\n 2- At least one symbol\n 3- At least one numeric value');
+    };
+  
+    const handleBlur = () => {
+      if (!/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[A-Z])(?=.*[\W_])/.test(password)) {
+        setWarning('Password must contain:\n 1- At least one capital letter\n 2- At least one symbol\n 3- At least one numeric value');
+      } else {
+        setWarning('');
+      }
+    };
+  
+    const handlePasswordChange = (event) => {
+      setPassword(event.target.value);
+    };
+
+
+
+
+
+
     function  handlesubmit()
 {
   
@@ -108,9 +133,22 @@ export default function JoySignInSideTemplate() {
     axios.post(posturl,data)
     .then(function(response)
     {
+      if(response.data.isSuccess=="true"){
       console.log(response)
       console.log("data to be created: ", data);
-      navigate('/Signin');
+      navigate('/Signin');}
+      else {
+        console.log(response)
+        if(response.data.errors!=null){
+          alert("Error in creating user: "+response.data.message + '\n' +response.data.errors);
+
+        }
+        else
+        {
+          alert("Error in creating user: "+response.data.message);
+        }
+        handleBack()
+      }
   })
 
 }
@@ -323,9 +361,17 @@ export default function JoySignInSideTemplate() {
                   <Input type="text" name="name" />
                 </FormControl>
                 <FormControl required>
-                  <FormLabel>Password</FormLabel>
-                  <Input type="password"  name="password"  />
-                </FormControl>
+                <FormLabel>Password</FormLabel>
+                <Input 
+                  type="password" 
+                  name="password" 
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  onChange={handlePasswordChange}
+                  value={password}
+                />
+                {warning && <Typography bgcolor="error">{warning}</Typography>}
+              </FormControl>
                 <FormControl required>
                   <FormLabel>Age</FormLabel>
                   <Input type="number"  name="Age"  />
