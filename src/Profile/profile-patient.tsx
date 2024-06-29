@@ -225,6 +225,14 @@ export default function MyProfile({user,role}) {
         <Card sx={{ backgroundColor: 'rgb(4,12,24)', mb: 2 }}>
           <Box sx={{ mb: 1 }}>
             <Typography level="title-md">Required Papers</Typography>
+            <Stack spacing={2} sx={{ my: 1 }}>
+              
+              </Stack>
+         </Box>
+        </Card>
+        {/* <Card sx={{ backgroundColor: 'rgb(4,12,24)', mb: 2 }}>
+          <Box sx={{ mb: 1 }}>
+            <Typography level="title-md">Required Papers</Typography>
             <Typography level="body-sm">
              Upload required papers for the doctor.
             </Typography>
@@ -257,7 +265,7 @@ export default function MyProfile({user,role}) {
               </Button>
             </CardActions>
           </CardOverflow>
-        </Card>
+        </Card> */}
       </Stack>
     </Box>
     </CssVarsProvider>
